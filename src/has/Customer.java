@@ -22,12 +22,12 @@ public class Customer {
     Vector advance_room;
     String room;
     int history;
-    Date spot_check_in_date;
-    Date spot_check_out_date;
+    int spot_check_in_date;
+    int spot_check_out_date;
     double rent_to_be_paid;
     Vector Catering;
-    Date expected_check_in_date;
-    Date expected_check_out_date;
+    Vector expected_check_in_date;
+    Vector expected_check_out_date;
     private static String token_number;
     private static String identity_number;
     
