@@ -20,9 +20,7 @@ public class Connectiond {
     }
         static Connection getconn() throws SQLException
         {
-            System.out.println("456");
             Connection con = DriverManager.getConnection(url, user, password);
-            System.out.println("123");
             return con;
         }
     
