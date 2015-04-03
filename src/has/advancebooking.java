@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -56,12 +58,157 @@ public class advancebooking extends javax.swing.JFrame {
         jTextField3.setVisible(false);
         jTextField4.setEditable(false);
         jTextField5.setEditable(false);
-        jTextField6.setEditable(false);
+        jTextField6.setVisible(false);
         jLabel10.setVisible(false);
         jLabel11.setVisible(false);
         
     }
+public static void updateroom(String roomno,int s,int t,int d) throws SQLException
+{
+          Connection conn = null;        
+          Statement stmt=null;          
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (SQLException ex) {
+           // Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error in conn");
+        }
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException ex) {
+            //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      /*  System.out.println(roomno+s);
+        System.out.println(t);
+        System.out.println(d);*/
+        String sql2,sql="UPDATE ";
+        
+           if(d==0)
+                sql=sql+"roomsa";   
+            if(d==1)
+                sql=sql+"roomsna"; 
+            if(d==2)
+                sql=sql+"roomda"; 
+            if(d==3)
+                sql=sql+"roomdna"; 
+            sql=sql+" SET D";
+            sql2=sql;
+                    for(int i=s;i<=t;i++)
+                    {
+                        sql=sql2+i;
+                        
+                        sql=sql+"="+"'B'";
+                        sql=sql+" WHERE roomno = ";
+                        sql=sql+"'"+roomno+"'";
+                        System.out.println(sql);
+                        stmt.executeUpdate(sql);
+                    }
+          
+}
+public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFoundException
+{
+    Connection conn = null;        
+          Statement stmt=null;          
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (SQLException ex) {
+           // Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error in conn");
+        }
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException ex) {
+            //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       try{
+              String sql = "SELECT id,Advance_room,Advance,ECID,ECOD,ISAC FROM Customer";
+              ResultSet rs = stmt.executeQuery(sql);
+              int id;
+              String property;
+              while(rs.next())
+              {
+               id  = rs.getInt("id");
+               if(id == id1)
+               {
+                   System.out.println("Inside id"+id);
+                    ObjectInputStream o = null;
+                  byte[] arr = rs.getBytes("Advance_room");
+                   Vector Advance_room = new Vector();
+                  if(arr!=null)
+                  {
+                      o = new ObjectInputStream(new ByteArrayInputStream(arr));
+                        Advance_room= (Vector)o.readObject();
+                  } 
+                 // Vector Advance_room= (Vector)o.readObject();
+                 
+                       Advance_room.add("SNA567");
+                  
+                 String updatestr = "UPDATE customer SET Advance_room = ?  WHERE id = "+id1;
+                 PreparedStatement p = conn.prepareStatement(updatestr);
+                 p.setObject(1,Advance_room);
+                 p.executeUpdate();
+                 
+                  System.out.println("Inside id after room");
+                  
+                 byte[] arr2 = rs.getBytes("Advance");
+                 Vector advance =new Vector();
+                if(arr2!=null)
+                  {
+                      o = new ObjectInputStream(new ByteArrayInputStream(arr2));
+                      advance = (Vector)o.readObject();
+                  } 
+                     advance.add(jTextField6.getText());
+                
+                  
+                 
+                String updatestr1 = "UPDATE customer SET Advance = ?  WHERE id = "+id1;
+                 PreparedStatement pp = conn.prepareStatement(updatestr1);
+                 pp.setObject(1,advance);
+                 pp.executeUpdate();
+                  
+                   byte[] arr3 = rs.getBytes("ECID");
+                   Vector ECID =new Vector();
+                  if(arr3!=null)
+                  {
+                   o = new ObjectInputStream(new ByteArrayInputStream(arr3));
+                       ECID = (Vector)o.readObject();
+                  }  
+                  
+                  ECID.add(a);
+                 String updatestr2 = "UPDATE customer SET ECID = ?  WHERE id = "+id1;
+                 PreparedStatement ppa = conn.prepareStatement(updatestr2);
+                 ppa.setObject(1,ECID);
+                 ppa.executeUpdate();
+                  
+                  byte[] arr4 = rs.getBytes("ECOD");
+                   Vector ECOD=new Vector();
+                  if(arr4!=null)
+                  {
+                      o = new ObjectInputStream(new ByteArrayInputStream(arr4));
+                      ECOD = (Vector)o.readObject();
+                  } 
+                  ECOD.add(b);
+                  String updatestr3 = "UPDATE customer SET ECOD = ?  WHERE id = "+id1;
+                 PreparedStatement ppaa= conn.prepareStatement(updatestr3);
+                 ppaa.setObject(1,ECOD);
+                 ppaa.executeUpdate(); 
+                 
+                 String sql1 = "UPDATE Customer " +
+                   "SET ISAC = 0 WHERE id ="+id1;
+                  stmt.executeUpdate(sql1);
 
+                   break;
+               }
+               
+              }
+       }
+              catch(Exception ex)
+          {
+              ex.printStackTrace();
+          }
+           
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -220,6 +367,11 @@ public class advancebooking extends javax.swing.JFrame {
         jButton3.setFont(jButton1.getFont());
         jButton3.setForeground(new java.awt.Color(0, 0, 204));
         jButton3.setText("Clear All");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
         jButton3.setBounds(250, 380, 105, 30);
 
@@ -314,16 +466,7 @@ public class advancebooking extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String str1,str2,str3,str4 = null;
+  String str1,str2,str3,str4 = null;
       str1=jTextField1.getText();
       if(str1.length()==0)
           jLabel4.setVisible(true);
@@ -339,20 +482,47 @@ public class advancebooking extends javax.swing.JFrame {
           jLabel7.setVisible(true);
       else
           jLabel7.setVisible(false);
+      str4=jTextField4.getText();
       if(str4.length()==0)
           jLabel11.setVisible(true);
       else
-          jLabel7.setVisible(false);
+          jLabel11.setVisible(false);
       if(str1.length()!=0 && str2.length()!=0 && str3.length()!=0 && str4.length()!=0)
-      {
+      {int g = 0;
             try {
-                int g=Checkcustomer.check(str1,str3,str2);
-            } catch (SQLException ex) {
+                
+                g=Checkcustomer.check(str1,str3,str2);
+                 //System.out.println("g="+g);
+                } catch (SQLException ex) {
                 Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                }
+         
+      try {
+          System.out.println(room);
+          System.out.println(g);
+         updateroom(room,(int)a,(int)b,z);
+          updatecustomer(g);
+          showMessageDialog(null, "Succesfully Booked the room  ");
+          dispose();
+      } catch (SQLException ex) {
+          Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IOException ex) {
+          Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (ClassNotFoundException ex) {
+          Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
       }
-      
-       
+           
+            
+      }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+dispose();     
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -437,7 +607,7 @@ public class advancebooking extends javax.swing.JFrame {
         jButton6.setEnabled(false);
         jLabel6.setVisible(false);
         jLabel8.setVisible(false);
-        jTextField6.setEditable(false);
+        jTextField6.setVisible(false);
         jLabel10.setVisible(false);
         jLabel11.setVisible(false);
         jLabel4.setVisible(false);
@@ -480,26 +650,31 @@ public class advancebooking extends javax.swing.JFrame {
            //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
-           long a=(cal.getTimeInMillis())- (System.currentTimeMillis());
+            a=(cal.getTimeInMillis())- (System.currentTimeMillis());
                                         a=a/1000; a=a/60;a=a/60; a=a/24;
-            long b=(cal1.getTimeInMillis())- (System.currentTimeMillis());  
+            b=(cal1.getTimeInMillis())- (System.currentTimeMillis());  
             b=b/1000;b=b/3600;b=b/24;
             
         try {
             /*System.out.println((int)a+presentday);
             System.out.println((int) b+presentday);
               System.out.println(z);*/
-              room= Checkavailable.check((int)a+presentday,(int) b+presentday,z );
-             // System.out.println(room);
+            a=a+presentday;
+            b=b+presentday;
+               room= Checkavailable.check((int)a,(int) b,z );
+            // System.out.println(room);
         } catch (SQLException ex) {
             Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(room!=null)
         {
         jLabel5.setVisible(true);
+        jButton1.setVisible(true);
+        jButton2.setVisible(true);
+        jButton3.setVisible(true);
         jLabel6.setVisible(true);
         jLabel8.setVisible(true);
-        jTextField6.setEditable(true);
+        jTextField6.setVisible(true);
         jLabel10.setVisible(true);
         jLabel11.setVisible(false);
         jLabel4.setVisible(false);
@@ -516,8 +691,11 @@ public class advancebooking extends javax.swing.JFrame {
         {
       	showMessageDialog(null, "Please Try for other Duration  ");
         jLabel5.setVisible(false);
+        jButton1.setVisible(false);
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
         jButton5.setEnabled(true);
-        jTextField6.setEditable(false);
+        jTextField6.setVisible(false);
         jLabel10.setVisible(false);
         jLabel11.setVisible(false);
         jButton6.setEnabled(false);
@@ -540,6 +718,15 @@ public class advancebooking extends javax.swing.JFrame {
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        jTextField3.setText("");
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField6.setText("");
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -576,7 +763,8 @@ public class advancebooking extends javax.swing.JFrame {
         });
     }
     Calendar cal,cal1,present;
-    int z;
+    int z;   
+    long a,b;
     String room;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

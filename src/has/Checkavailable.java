@@ -58,7 +58,7 @@ public class Checkavailable {
              String sa="D"+j;
 
             String c= rs.getString(sa);
-             System.out.println(c);
+          //   System.out.println(c);
              if(c.equalsIgnoreCase("A"))
              {
                  found=1;
