@@ -28,6 +28,7 @@ public class CateringServices extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -38,6 +39,14 @@ public class CateringServices extends javax.swing.JFrame {
 
         jButton3.setText("EDIT ITEMS");
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 120, -1));
+
+        jButton4.setText("CHANGE U/P");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 120, -1));
 
         jButton2.setText("PLACE ORDER");
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 120, -1));
@@ -53,6 +62,11 @@ public class CateringServices extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ChangeUAP u = new ChangeUAP();
+        u.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,6 +107,7 @@ public class CateringServices extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

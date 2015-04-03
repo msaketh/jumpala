@@ -5,8 +5,12 @@
  */
 package has;
 
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 /**
@@ -79,8 +83,30 @@ public class AddItem extends javax.swing.JFrame {
             rate = Double.parseDouble(str2);
             Connection con = Connectiond.getconn();
             Statement  stmt = con.createStatement();
-            String sql = "INSERT INTO menu(Item,Price)"+" VALUES('"+str1+"',"+rate+")";
-            stmt.executeUpdate(sql);
+            String sql = "SELECT Item FROM menu";
+            ResultSet rs = stmt.executeQuery(sql);
+            int m = 0;
+            while(rs.next())
+            {
+                String t = rs.getString("Item");
+                if(t.equalsIgnoreCase(str1))
+                {
+                    m = 1;
+                    break;
+                }
+               
+            }
+            if(m==1)
+            {
+                JOptionPane.showMessageDialog(rootPane,"That item already exists..if you want to edit got to edit menu");
+            }
+            else
+            {
+                
+                sql = "INSERT INTO menu(Item,Price)"+" VALUES('"+str1+"',"+rate+")";
+                stmt.executeUpdate(sql);
+                JOptionPane.showMessageDialog(rootPane,"Item added Successfully");
+            }
         }
         catch(Exception ex)
         {
