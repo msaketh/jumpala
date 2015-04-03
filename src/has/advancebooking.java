@@ -49,12 +49,16 @@ public class advancebooking extends javax.swing.JFrame {
         jButton7.setVisible(false);
         jButton2.setVisible(false);
         jButton3.setVisible(false);
-         jButton6.setEnabled(false);
+        jButton6.setEnabled(false);
+        
         jTextField1.setVisible(false);
         jTextField2.setVisible(false);
         jTextField3.setVisible(false);
         jTextField4.setEditable(false);
         jTextField5.setEditable(false);
+        jTextField6.setEditable(false);
+        jLabel10.setVisible(false);
+        jLabel11.setVisible(false);
         
     }
 
@@ -89,6 +93,9 @@ public class advancebooking extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -261,6 +268,28 @@ public class advancebooking extends javax.swing.JFrame {
         jPanel1.add(jButton7);
         jButton7.setBounds(440, 110, 160, 27);
 
+        jLabel10.setFont(jLabel5.getFont());
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Advance");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(150, 290, 86, 30);
+
+        jTextField6.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
+        jTextField6.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 0, 153), null));
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField6);
+        jTextField6.setBounds(270, 290, 180, 30);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel11.setText("This field cannot be empty");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(470, 300, 150, 14);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/Professional-powerpoint-templates-free-download-animated-desktop.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(-10, -10, 640, 470);
@@ -294,7 +323,35 @@ public class advancebooking extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String str1,str2,str3;
+        String str1,str2,str3,str4 = null;
+      str1=jTextField1.getText();
+      if(str1.length()==0)
+          jLabel4.setVisible(true);
+      else
+          jLabel4.setVisible(false);
+      str2=jTextField2.getText();
+      if(str2.length()==0)
+          jLabel9.setVisible(true);
+      else
+          jLabel9.setVisible(false);
+      str3=jTextField3.getText();
+      if(str3.length()==0)
+          jLabel7.setVisible(true);
+      else
+          jLabel7.setVisible(false);
+      if(str4.length()==0)
+          jLabel11.setVisible(true);
+      else
+          jLabel7.setVisible(false);
+      if(str1.length()!=0 && str2.length()!=0 && str3.length()!=0 && str4.length()!=0)
+      {
+            try {
+                int g=Checkcustomer.check(str1,str3,str2);
+            } catch (SQLException ex) {
+                Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      }
+      
        
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -380,6 +437,9 @@ public class advancebooking extends javax.swing.JFrame {
         jButton6.setEnabled(false);
         jLabel6.setVisible(false);
         jLabel8.setVisible(false);
+        jTextField6.setEditable(false);
+        jLabel10.setVisible(false);
+        jLabel11.setVisible(false);
         jLabel4.setVisible(false);
         jLabel9.setVisible(false);
         jLabel7.setVisible(false);
@@ -426,11 +486,11 @@ public class advancebooking extends javax.swing.JFrame {
             b=b/1000;b=b/3600;b=b/24;
             
         try {
-            System.out.println((int)a+presentday);
+            /*System.out.println((int)a+presentday);
             System.out.println((int) b+presentday);
-              System.out.println(z);
+              System.out.println(z);*/
               room= Checkavailable.check((int)a+presentday,(int) b+presentday,z );
-              System.out.println(room);
+             // System.out.println(room);
         } catch (SQLException ex) {
             Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -439,9 +499,15 @@ public class advancebooking extends javax.swing.JFrame {
         jLabel5.setVisible(true);
         jLabel6.setVisible(true);
         jLabel8.setVisible(true);
+        jTextField6.setEditable(true);
+        jLabel10.setVisible(true);
+        jLabel11.setVisible(false);
         jLabel4.setVisible(false);
         jLabel9.setVisible(false);
         jLabel7.setVisible(false);
+        jComboBox1.setEditable(false);
+        jButton5.setEnabled(false);
+        jButton5.setEnabled(false);
         jTextField1.setVisible(true);
         jTextField2.setVisible(true);
         jTextField3.setVisible(true);
@@ -451,6 +517,9 @@ public class advancebooking extends javax.swing.JFrame {
       	showMessageDialog(null, "Please Try for other Duration  ");
         jLabel5.setVisible(false);
         jButton5.setEnabled(true);
+        jTextField6.setEditable(false);
+        jLabel10.setVisible(false);
+        jLabel11.setVisible(false);
         jButton6.setEnabled(false);
         jLabel6.setVisible(false);
         jLabel8.setVisible(false);
@@ -467,6 +536,10 @@ public class advancebooking extends javax.swing.JFrame {
         jTextField3.setVisible(false);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -515,6 +588,8 @@ public class advancebooking extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -529,5 +604,6 @@ public class advancebooking extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,7 +25,7 @@ public class Checkavailable {
          Statement stmt = null;
          String w=null;
          int found=0;
-         System.out.println("At the start");
+        // System.out.println("At the start");
            try{ Connection conn= DriverManager.getConnection(url, user, password);
             stmt = conn.createStatement();}
            catch(Exception rx)
@@ -41,12 +41,12 @@ public class Checkavailable {
             if(d==0)
                 sql=sql+"roomsa";   
             if(d==1)
-                sql=sql+"roomsqa"; 
+                sql=sql+"roomsna"; 
             if(d==2)
                 sql=sql+"roomda"; 
             if(d==3)
                 sql=sql+"roomdna"; 
-            System.out.println(sql);
+            //System.out.println(sql);
            ResultSet rs = stmt.executeQuery(sql);
            while(rs.next()){
         if(found==1)
