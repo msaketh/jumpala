@@ -5,6 +5,18 @@
  */
 package has;
 
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author MAHANKALI SAKETH
@@ -16,7 +28,43 @@ public class UpdateDiscount extends javax.swing.JFrame {
      */
     public UpdateDiscount() {
         initComponents();
+        try{
+             Connection con =  Connectiond.getconn();
+             Statement stmt = con.createStatement();
+             String sql = "SELECT id,Value FROM central";
+             ResultSet rs = stmt.executeQuery(sql);
+             byte[] arr;
+             Vector value = new Vector();
+             int id;
+             while(rs.next())
+             {
+                id  = rs.getInt("id");
+               /*byte[] buf = rs.getBytes("copyDetails");
+               ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(buf));
+               ArrayList<SubBook> copyDetails = (ArrayList<SubBook>) o.readObject();*/
+                if(id == 13)
+                {
+                  arr = rs.getBytes("Value");
+                  ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(arr)); 
+                  value= (Vector)o.readObject();
+                  break;
+               }
+               
+              }
+          
+             t1.setText(Double.toString((double)value.get(0)));
+             t3.setText(Double.toString((double)value.get(1)));
+             t5.setText(Double.toString((double)value.get(2)));
+             t7.setText(Double.toString((double)value.get(3)));
+             t9.setText(Double.toString((double)value.get(4)));
+             t11.setText(Double.toString((double)value.get(5)));
+        }
         
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+            System.out.println("Exception caught");
+        }
     }
 
     /**
@@ -28,6 +76,7 @@ public class UpdateDiscount extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         t1 = new javax.swing.JTextField();
         t3 = new javax.swing.JTextField();
@@ -57,8 +106,22 @@ public class UpdateDiscount extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton2.setForeground(new java.awt.Color(0, 102, 204));
+        jButton2.setText("BACK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, -1, -1));
+
         jButton1.setForeground(new java.awt.Color(0, 51, 204));
         jButton1.setText("SUBMIT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, -1, -1));
 
         t1.setEditable(false);
@@ -156,6 +219,87 @@ public class UpdateDiscount extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_t10ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String str1 = t2.getText();
+        String str2 = t4.getText();
+        String str3 = t6.getText();
+        String str4 = t8.getText();
+        String str5 = t10.getText();
+        String str6 = t12.getText();
+        Vector value = new Vector();
+        double d1=0.0;
+        double d2=0.0;
+        double d3=0.0;
+        double d4 =0.0;
+        double d5 =0.0;
+        double d6 =0.0;
+        
+        try
+        {
+            d1 = Double.parseDouble(str1);
+            d2 = Double.parseDouble(str2);
+            d3 = Double.parseDouble(str3);
+            d4 = Double.parseDouble(str4);
+            d5 = Double.parseDouble(str5);
+            d6 = Double.parseDouble(str6);
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(rootPane,"invalid entries ..please enter again");
+        }
+        try
+        {
+             Connection con =  Connectiond.getconn();
+             Statement stmt = con.createStatement();
+             String sql = "SELECT id,Value FROM central";
+             ResultSet rs = stmt.executeQuery(sql);
+             byte[] arr;
+             int id;
+             while(rs.next())
+             {
+                id  = rs.getInt("id");
+               /*byte[] buf = rs.getBytes("copyDetails");
+               ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(buf));
+               ArrayList<SubBook> copyDetails = (ArrayList<SubBook>) o.readObject();*/
+                if(id == 13)
+                {
+                  arr = rs.getBytes("Value");
+                  ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(arr)); 
+                  value= (Vector)o.readObject();
+                  break;
+               }
+               
+              }
+        }
+        catch(Exception ex)
+        {
+            
+        }
+        value.set(0,d1);
+        value.set(1,d2);
+        value.set(2,d3);
+        value.set(3,d4);
+        value.set(4,d5);
+        value.set(5,d6);
+        String updatestr = "UPDATE central SET Value = ?  WHERE id = 13";
+        try {
+            PreparedStatement p = Connectiond.getconn().prepareStatement(updatestr);
+            p.setObject(1,value);
+             p.executeUpdate();
+              JOptionPane.showMessageDialog(rootPane,"Successfully updated");
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateDiscount.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+          
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -193,6 +337,7 @@ public class UpdateDiscount extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

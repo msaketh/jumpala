@@ -44,6 +44,7 @@ public class UpdateTariff extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         c1 = new javax.swing.JComboBox();
         t1 = new javax.swing.JTextField();
         t5 = new javax.swing.JTextField();
@@ -63,6 +64,15 @@ public class UpdateTariff extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setForeground(new java.awt.Color(0, 102, 204));
+        jButton1.setText("BACK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 70, -1));
 
         c1.setForeground(new java.awt.Color(0, 102, 204));
         c1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SINGLE-AC", "SINGLE-NONAC", "DOUBLE-AC", "DOUBLE-NONAC" }));
@@ -342,6 +352,10 @@ public class UpdateTariff extends javax.swing.JFrame {
           t5.setText("");
     }//GEN-LAST:event_c1ItemStateChanged
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                 dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -381,6 +395,7 @@ public class UpdateTariff extends javax.swing.JFrame {
     private javax.swing.JButton b1;
     private javax.swing.JButton b2;
     private javax.swing.JComboBox c1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
