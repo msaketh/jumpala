@@ -160,14 +160,13 @@ public class CheckOut extends javax.swing.JFrame {
                   }
                   sql="UPDATE customer SET ISAC=0 WHERE id= "+rs.getInt("id");
                   stmt.executeUpdate(sql);
-                  int ap=rs.getInt("History")+rs.getInt("SCOD")-rs.getInt("SCID"),ap1=+rs.getInt("SCOD")-rs.getInt("SCID");
+                  int ap=rs.getInt("History")+rs.getInt("SCOD")-rs.getInt("SCID"),ap1=rs.getInt("SCOD")-rs.getInt("SCID");
                    sql="UPDATE customer SET history="+ap+" WHERE id= "+rs.getInt("id");
                   stmt.executeUpdate(sql);
                   int to=0;
                   String room=rs.getString("Room");
                   String roompart=room.substring(0,1);
-                  
-                 double roomrent=0,tariffa=0,dicounta=0,advance=0;
+                  double roomrent=0,tariffa=0,discounta=0,advance=0;
                   advance=rs.getDouble("RTP");
                   if(roompart.equalsIgnoreCase("SA")){
                       amount=ap1*(double) rates.elementAt(0);
@@ -176,9 +175,8 @@ public class CheckOut extends javax.swing.JFrame {
                        tariffa=(amount*(double)tariff.elementAt(0))/100;
                        amount=amount+tariffa;
                        to=(int) totalbookings.elementAt(0);
-                       to=to+ap;
+                       to=to+ap1;
                        totalbookings.setElementAt(to,0);
-                       
                   }
                   
                   if(roompart.equalsIgnoreCase("SNA"))amount=(double) rates.elementAt(1);
@@ -189,7 +187,7 @@ public class CheckOut extends javax.swing.JFrame {
                         tariffa=(amount*(double)tariff.elementAt(1))/100;
                        amount=amount+(amount*(double)tariff.elementAt(1))/100;
                        to=(int) totalbookings.elementAt(1);
-                       to=to+ap;
+                       to=to+ap1;
                        totalbookings.setElementAt(to,1);
                   }
                   if(roompart.equalsIgnoreCase("DA"))
@@ -200,7 +198,7 @@ public class CheckOut extends javax.swing.JFrame {
                        tariffa=(amount*(double)tariff.elementAt(2))/100;
                        amount=amount+(amount*(double)tariff.elementAt(2))/100;
                        to=(int) totalbookings.elementAt(2);
-                       to=to+ap;
+                       to=to+ap1;
                        totalbookings.setElementAt(to,2);
                   }
                   if(roompart.equalsIgnoreCase("DNA"))
@@ -211,7 +209,7 @@ public class CheckOut extends javax.swing.JFrame {
                         tariffa=(amount*(double)tariff.elementAt(3))/100;
                        amount=amount+(amount*(double)tariff.elementAt(3))/100;
                        to=(int) totalbookings.elementAt(3);
-                       to=to+ap;
+                       to=to+ap1;
                        totalbookings.setElementAt(to,3);
                   }
                   String updatestr = "UPDATE central SET Value = ?  WHERE id =12 ";
@@ -229,30 +227,186 @@ public class CheckOut extends javax.swing.JFrame {
                 
                  if(cusfre<minfree && amount<minbill)
                  {
-                     
+                     discounta=(amount*d1)/100;
+                     amount=amount+discounta;
                  }
-                     
-                     
-                     
-                  tb.addRow(new Object[]{new String(rs.getString("Name")),new String(rs.getString("I")),new Double(advance),new Double(roomrent),new Double(tariffa)});
-
-
+                  if(cusfre<minfree && amount>minbill)
+                 {
+                     discounta=(amount*d2)/100;
+                     amount=amount+discounta;
+                 }
+                   if(cusfre>minfree && amount<minbill)
+                 {
+                     discounta=(amount*d3)/100;
+                     amount=amount+discounta;
+                 }
+                    if(cusfre>minfree && amount>minbill)
+                 {
+                     discounta=(amount*d4)/100;
+                     amount=amount+discounta;
+                 }  
+                    amount=amount-advance;
+                  tb2.addRow(new Object[]{new String(rs.getString("Name")),new String(rs.getString("I")),new Double(advance),new Double(roomrent),new Double(tariffa),new Double(discounta),new Double(amount)});
                 }
               }
                
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
+                             
              if(x==1)
              {
+                 Vector advancev=null,ecid=null,ecod=null,advanceroom=null;
+                                                 ObjectInputStream o = null;
+                                                           byte[] arr = rs.getBytes("Advance");
+                                                        advancev = new Vector();
+                                                     if(arr!=null)
+                                                      {
+                                                             o = new ObjectInputStream(new ByteArrayInputStream(arr));
+                                                             advancev= (Vector)o.readObject();
+                                                       } 
+                                                      byte[] arr2 = rs.getBytes("Advance_room");
+                                                        advanceroom = new Vector();
+                                                     if(arr!=null)
+                                                      {
+                                                             o = new ObjectInputStream(new ByteArrayInputStream(arr2));
+                                                             advanceroom= (Vector)o.readObject();
+                                                       } 
+                                                      byte[] arr3 = rs.getBytes("ECID");
+                                                        ecid = new Vector();
+                                                     if(arr!=null)
+                                                      {
+                                                             o = new ObjectInputStream(new ByteArrayInputStream(arr3));
+                                                             ecid= (Vector)o.readObject();
+                                                       } 
+                                                     byte[] arr4 = rs.getBytes("ECOD");
+                                                        ecid = new Vector();
+                                                     if(arr!=null)
+                                                      {
+                                                             o = new ObjectInputStream(new ByteArrayInputStream(arr4));
+                                                             ecod= (Vector)o.readObject();
+                                                       } 
+                                                     
+                 for(int l=0;l<ecod.size();l++)
+                 {
+                    int y=(int)ecod.elementAt(l);
+               if(present==y)
+                {
+                  double Totalbill=0,amount=0;
+                //  ObjectInputStream o = null;
+                  byte[] arr1 = rs.getBytes("Catering");
+                   Vector Catering = new Vector();
+                  if(arr!=null)
+                  {
+                      o = new ObjectInputStream(new ByteArrayInputStream(arr1));
+                      Catering= (Vector)o.readObject();
+                  } 
+                  if(Catering.size()!=0)
+                  {
+                                        CateringObject obj=(CateringObject) Catering.elementAt(0);
+                                        Totalbill=obj.bill;
+                                         tb.addRow(new Object[]{new String(rs.getString("Name")),new String(rs.getString("I")),new String(obj.date),new String(obj.item),new Double(obj.bill) });
+                                                         for(int f=1;f<Catering.size();f++)
+                                                          {
+                                                              obj=(CateringObject) Catering.elementAt(f);
+                                                            tb.addRow(new Object[]{new String(""),new String(""),new String(obj.date),new String(obj.item),new Double(obj.bill) });
+                                                            Totalbill=Totalbill+obj.bill;
+                                                           }
+                                                         String updatestr = "UPDATE customer SET Catering = ?  WHERE id = "+rs.getInt("id");
+                                                         PreparedStatement p = conn.prepareStatement(updatestr);
+                                                         p.setObject(1,null);
+                                                         p.executeUpdate();
+                  }
+                  sql="UPDATE customer SET ISAC=0 WHERE id= "+rs.getInt("id");
+                  stmt.executeUpdate(sql);
+                  int ap1=(int)ecod.elementAt(l)-(int)ecid.elementAt(l);
+                  int ap=rs.getInt("History")+ap1;
+                   sql="UPDATE customer SET history="+ap+" WHERE id= "+rs.getInt("id");
+                  stmt.executeUpdate(sql);
+                  
+                  int to=0;
+                  String room=(String) advanceroom.elementAt(l);
+                  String roompart=room.substring(0,1);
+                  double roomrent=0,tariffa=0,discounta=0,advance=0;
+                  advance=(Double) advancev.elementAt(l);
+                  if(roompart.equalsIgnoreCase("SA")){
+                      amount=ap1*(double) rates.elementAt(0);
+                      roomrent=amount;
+                       amount=amount+Totalbill;
+                       tariffa=(amount*(double)tariff.elementAt(0))/100;
+                       amount=amount+tariffa;
+                       to=(int) totalbookings.elementAt(0);
+                       to=to+ap1;
+                       totalbookings.setElementAt(to,0);
+                  }
+                  
+                  if(roompart.equalsIgnoreCase("SNA"))amount=(double) rates.elementAt(1);
+                  {
+                       amount=ap1*(double) rates.elementAt(1);
+                       roomrent=amount;
+                       amount=amount+Totalbill;
+                        tariffa=(amount*(double)tariff.elementAt(1))/100;
+                       amount=amount+(amount*(double)tariff.elementAt(1))/100;
+                       to=(int) totalbookings.elementAt(1);
+                       to=to+ap1;
+                       totalbookings.setElementAt(to,1);
+                  }
+                  if(roompart.equalsIgnoreCase("DA"))
+                  {
+                       amount=ap1*(double) rates.elementAt(2);
+                        roomrent=amount;
+                       amount=amount+Totalbill;
+                       tariffa=(amount*(double)tariff.elementAt(2))/100;
+                       amount=amount+(amount*(double)tariff.elementAt(2))/100;
+                       to=(int) totalbookings.elementAt(2);
+                       to=to+ap1;
+                       totalbookings.setElementAt(to,2);
+                  }
+                  if(roompart.equalsIgnoreCase("DNA"))
+                  {
+                      amount=ap1*(double) rates.elementAt(3);
+                      roomrent=amount;
+                       amount=amount+Totalbill;
+                        tariffa=(amount*(double)tariff.elementAt(3))/100;
+                       amount=amount+(amount*(double)tariff.elementAt(3))/100;
+                       to=(int) totalbookings.elementAt(3);
+                       to=to+ap1;
+                       totalbookings.setElementAt(to,3);
+                  }
+                  String updatestr = "UPDATE central SET Value = ?  WHERE id =12 ";
+                                                         PreparedStatement p = conn.prepareStatement(updatestr);
+                                                         p.setObject(1,totalbookings);
+                                                         p.executeUpdate();
+                 int history=rs.getInt("history");
+                 double cusfre=history/present;
+                 double minfree=(double) discount.elementAt(0);
+                 double minbill=(double) discount.elementAt(1);
+                 double d1=(double) discount.elementAt(2);
+                 double d2=(double) discount.elementAt(3);
+                 double d3=(double) discount.elementAt(4);
+                 double d4=(double) discount.elementAt(5);
                 
+                 if(cusfre<minfree && amount<minbill)
+                 {
+                     discounta=(amount*d1)/100;
+                     amount=amount+discounta;
+                 }
+                  if(cusfre<minfree && amount>minbill)
+                 {
+                     discounta=(amount*d2)/100;
+                     amount=amount+discounta;
+                 }
+                   if(cusfre>minfree && amount<minbill)
+                 {
+                     discounta=(amount*d3)/100;
+                     amount=amount+discounta;
+                 }
+                    if(cusfre>minfree && amount>minbill)
+                 {
+                     discounta=(amount*d4)/100;
+                     amount=amount+discounta;
+                 }  
+                     amount=amount-advance;
+                  tb2.addRow(new Object[]{new String(rs.getString("Name")),new String(rs.getString("I")),new Double(advance),new Double(roomrent),new Double(tariffa),new Double(discounta),new Double(amount)});
+                }
+             }
              }
            }
            
