@@ -374,7 +374,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(250, 380, 110, 30);
+        jButton3.setBounds(250, 380, 120, 30);
 
         jButton4.setFont(new java.awt.Font("Vijaya", 0, 20)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 102));
@@ -387,14 +387,14 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
         jPanel1.add(jButton4);
         jButton4.setBounds(526, 10, 87, 30);
 
-        jButton5.setIcon(new javax.swing.ImageIcon("F:\\SEMESTER-4\\Software\\Java\\Travel\\calendar_icon.png")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/calendar_icon.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton5);
-        jButton5.setBounds(390, 80, 30, 27);
+        jButton5.setBounds(390, 80, 30, 30);
 
         jTextField5.setFont(jTextField4.getFont());
         jTextField5.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 153, 153), null));

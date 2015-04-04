@@ -6,11 +6,15 @@
 package has;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -94,12 +98,14 @@ public class Login extends javax.swing.JFrame {
            String r2 = "";
            String c1 = "";
            String c2 = "";
+           String sql;
+           int presentday =1;
         try 
         {
            
            Connection con =  Connectiond.getconn();
            Statement stmt = con.createStatement();
-           String sql = "SELECT id,Value FROM central";
+           sql = "SELECT id,Value FROM central";
            ResultSet rs = stmt.executeQuery(sql);
            
            int id;
@@ -136,53 +142,534 @@ public class Login extends javax.swing.JFrame {
                }
                  
             }
-          }
-          catch(Exception ex)
-          {
+           }
+           catch(Exception ex)
+           {
               
-          }
-        if(str.equals("MANAGER"))
-        {
-           if(str1.equals(m1)&& str2.equals(m2) )
-           {
-               ManagerFunctions a = new ManagerFunctions();
-               a.setVisible(true);
            }
-           else
+           if(str.equals("MANAGER"))
            {
-               JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
-           }
-        }
-        else if(str.equals("RECEPTIONIST"))
-        {
-           if(str1.equals(r1)&& str2.equals(r2) )
+                try {
+                      if(str1.equals(m1)&& str2.equals(m2) )
+                      {
+                         Connection con2 =  Connectiond.getconn();
+                         Statement stmt2 = con2.createStatement();
+                         String sql2 = "SELECT id,Value FROM central";
+                         ResultSet rs2 = stmt2.executeQuery(sql2);
+                         int id;
+                         while(rs2.next())
+                        {
+                            id  = rs2.getInt("id");
+                            if(id ==14)
+                            {
+                            
+                                 presentday = rs2.getInt("Value");
+                            
+                             }
+                        }
+    
+                        String sql3 = "SELECT id,ECID,ISAC FROM Customer";
+                        Connection con3 =  Connectiond.getconn();
+                        Statement stmt3 = con3.createStatement();
+                        ResultSet rs3 = stmt3.executeQuery(sql3);
+                        byte[] arr=null;
+                        Vector ecid = new Vector();
+                        int check1 = 0;
+                        int g = 0;
+                        while(rs3.next())
+                       {
+                             check1  = 0;
+                             arr = rs3.getBytes("ECID");
+                             g = rs3.getInt("id");
+                             if(arr!=null)
+                             {
+                                   ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(arr)); 
+                                   ecid = (Vector)o.readObject();
+                                   for(int j=0;j<ecid.size();++j)
+                                  {
+                                        if((long)presentday == (long)ecid.get(j))
+                                         {
+                                              check1  = 1;
+                                              break;
+                                         }
+                                  }
+                                  if(check1==1)
+                                  {
+                                     String  sql4="UPDATE customer"+" SET ISAC=1" +" WHERE id="+g;
+                                     Connection con4 = Connectiond.getconn();
+                                     Statement stmt4 = con4.createStatement();
+                                     stmt4.executeUpdate(sql4);
+                                     sql4="SELECT history FROM Customer"+" WHERE id="+g;
+                                     int history=0;
+                                     double fre=0;
+                                     try {
+                                           ResultSet rsz = stmt4.executeQuery(sql4);
+                                            history = rsz.getInt("history");         
+                                         } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                                 }
+                                     sql4 = "SELECT id,Value FROM central";
+                                     {
+                                        ResultSet rsz = stmt4.executeQuery(sql4);
+                                        double d = 0.0;
+                                        int iad;
+                                        while(rsz.next())
+                                         {
+                                              iad  = rsz.getInt("id");
+                                              if(iad == 9)
+                                              {
+                                                    fre = rsz.getDouble("Value");
+                                               }
+               
+                                          }
+                                      }
+                                     double custfre=history/(int)presentday;
+                                     if(custfre>=fre)
+                                     {
+                                          sql4="SELECT id,Identity FROM Customer"+" WHERE id="+g;
+                                          String sa=null;
+                                          try {
+                                          ResultSet rsz = stmt4.executeQuery(sql4);
+                                          sa= rsz.getString("Identity");         
+                                         } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                                 }
+                                          if(sa==null)
+                                          {
+                                            String s = null;
+                                            sql4 = "SELECT id,Value FROM central";
+                                           {
+                                         ResultSet rsz = stmt4.executeQuery(sql4);
+                                          int iad;
+                                           while(rsz.next())
+                                            {
+                                                iad  = rsz.getInt("id");
+                                                if(iad == 8)
+                                                {
+                                                    s= rsz.getString("value");
+                                                }
+               
+                                            }
+                                           }
+                                           try {
+                                                     String s1=s.substring(1);
+                                                     int i=Integer.parseInt(s1);
+                                                     i=i+1;
+                                                     s1="I"+i;
+                                                     sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
+                                                     stmt4.executeUpdate(sql4);
+                                                      sql4="UPDATE customer"+" SET Identity="+"'"+s1+"'"+" WHERE id="+g;
+                                                     stmt4.executeUpdate(sql4);
+                                                     sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=8";
+                                                      stmt4.executeUpdate(sql4);
+                                              } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                                 }
+                                          }
+                                          else
+                                          {
+                                               sql4 ="UPDATE customer"+" SET I="+"'"+sa+"'"+" WHERE id="+g;
+                                               stmt4.executeUpdate(sql4);
+                                          } 
+                            
+                                     }
+                                     else
+                                     {
+                                         String s=null;
+                                         sql4 = "SELECT id,Value FROM central";
+                                         {
+                                            ResultSet rsz = stmt4.executeQuery(sql4);
+                                            int iad;
+                                            while(rsz.next())
+                                            {
+                                                iad  = rsz.getInt("id");
+                                                if(iad == 7)
+                                                {
+                                                     s= rsz.getString("value");
+                                                }
+               
+                                            }
+                                         }
+                                         try {
+                                          
+                                                String s1=s.substring(1);
+                                                int i=Integer.parseInt(s1);
+                                                i=i+1;
+                                                s1="T"+i;
+                                                sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
+                                                stmt4.executeUpdate(sql4);
+                                                sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=7";
+                                                stmt4.executeUpdate(sql4);
+                                              } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                              }
+                                     }
+                             }
+                        }
+                    }
+                        ManagerFunctions m = new ManagerFunctions();
+                        m.setVisible(true);
+                    }
+                   else{
+                       JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
+                    }
+                    
+                }
+                catch(Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+           if(str.equals("RECEPTIONIST"))
            {
-               Receptionist a = new Receptionist();
-               a.setVisible(true);
-           }
-           else
-           {
-               JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
-           }
-        }
-        else if(str.equals("CATERING SERVICES"))
-        {
-           if(str1.equals(c1)&& str2.equals(c2) )
-           {
-               CateringServices a = new CateringServices();
-               a.setVisible(true);
-           }
-           else
-           {
-               JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
-           }
-        }
-        
+                try {
+                      if(str1.equals(r1)&& str2.equals(r2) )
+                      {
+                         Connection con2 =  Connectiond.getconn();
+                         Statement stmt2 = con2.createStatement();
+                         String sql2 = "SELECT id,Value FROM central";
+                         ResultSet rs2 = stmt2.executeQuery(sql2);
+                         int id;
+                         while(rs2.next())
+                        {
+                            id  = rs2.getInt("id");
+                            if(id ==14)
+                            {
+                            
+                                 presentday = rs2.getInt("Value");
+                            
+                             }
+                        }
+    
+                        String sql3 = "SELECT id,ECID,ISAC FROM Customer";
+                        Connection con3 =  Connectiond.getconn();
+                        Statement stmt3 = con3.createStatement();
+                        ResultSet rs3 = stmt3.executeQuery(sql3);
+                        byte[] arr=null;
+                        Vector ecid = new Vector();
+                        int check1 = 0;
+                        int g = 0;
+                        while(rs3.next())
+                       {
+                             check1  = 0;
+                             arr = rs3.getBytes("ECID");
+                             g = rs3.getInt("id");
+                             if(arr!=null)
+                             {
+                                   ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(arr)); 
+                                   ecid = (Vector)o.readObject();
+                                   for(int j=0;j<ecid.size();++j)
+                                  {
+                                        if((long)presentday == (long)ecid.get(j))
+                                         {
+                                              check1  =1;
+                                              break;
+                                         }
+                                  }
+                                  if(check1==1)
+                                  {
+                                     String  sql4="UPDATE customer"+" SET ISAC=1" +" WHERE id="+g;
+                                     Connection con4 = Connectiond.getconn();
+                                     Statement stmt4 = con4.createStatement();
+                                     stmt4.executeUpdate(sql4);
+                                     sql4="SELECT history FROM Customer"+" WHERE id="+g;
+                                     int history=0,present=0;
+                                     double fre=0;
+                                     try {
+                                           ResultSet rsz = stmt4.executeQuery(sql4);
+                                            history = rsz.getInt("history");         
+                                         } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                                 }
+                                     sql4 = "SELECT id,Value FROM central";
+                                     {
+                                        ResultSet rsz = stmt4.executeQuery(sql4);
+                                        double d = 0.0;
+                                        int iad;
+                                        while(rsz.next())
+                                         {
+                                              iad  = rsz.getInt("id");
+                                              if(iad == 9)
+                                              {
+                                                    fre = rsz.getDouble("Value");
+                                               }
+               
+                                          }
+                                      }
+                                     double custfre=history/(int)presentday;
+                                     if(custfre>=fre)
+                                     {
+                                          sql4="SELECT id,Identity FROM Customer"+" WHERE id="+g;
+                                          String sa=null;
+                                          try {
+                                          ResultSet rsz = stmt4.executeQuery(sql4);
+                                          sa= rsz.getString("Identity");         
+                                         } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                                 }
+                                          if(sa==null)
+                                          {
+                                            String s = null;
+                                            sql4 = "SELECT id,Value FROM central";
+                                           {
+                                         ResultSet rsz = stmt4.executeQuery(sql4);
+                                          int iad;
+                                           while(rsz.next())
+                                            {
+                                                iad  = rsz.getInt("id");
+                                                if(iad == 8)
+                                                {
+                                                    s= rsz.getString("value");
+                                                }
+               
+                                            }
+                                           }
+                                           try {
+                                                     String s1=s.substring(1);
+                                                     int i=Integer.parseInt(s1);
+                                                     i=i+1;
+                                                     s1="I"+i;
+                                                     sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
+                                                     stmt4.executeUpdate(sql4);
+                                                      sql4="UPDATE customer"+" SET Identity="+"'"+s1+"'"+" WHERE id="+g;
+                                                     stmt4.executeUpdate(sql4);
+                                                     sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=8";
+                                                      stmt4.executeUpdate(sql4);
+                                              } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                                 }
+                                          }
+                                          else
+                                          {
+                                               sql4 ="UPDATE customer"+" SET I="+"'"+sa+"'"+" WHERE id="+g;
+                                               stmt4.executeUpdate(sql4);
+                                          } 
+                            
+                                     }
+                                     else
+                                     {
+                                         String s=null;
+                                         sql4 = "SELECT id,Value FROM central";
+                                         {
+                                            ResultSet rsz = stmt4.executeQuery(sql4);
+                                            int iad;
+                                            while(rsz.next())
+                                            {
+                                                iad  = rsz.getInt("id");
+                                                if(iad == 7)
+                                                {
+                                                     s= rsz.getString("value");
+                                                }
+               
+                                            }
+                                         }
+                                         try {
+                                          
+                                                String s1=s.substring(1);
+                                                int i=Integer.parseInt(s1);
+                                                i=i+1;
+                                                s1="T"+i;
+                                                sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
+                                                stmt4.executeUpdate(sql4);
+                                                sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=7";
+                                                stmt4.executeUpdate(sql4);
+                                              } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                              }
+                                     }
+                             }
+                        }
+                    }
+                    Receptionist r  = new Receptionist();
+                    r.setVisible(true);
+                    }
+                   else{
+                       JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
+                    }
+                    
+                }
+                catch(Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+            if(str.equals("CATERING SERVICES"))
+            {
+                try {
+                      if(str1.equals(m1)&& str2.equals(m2) )
+                      {
+                         Connection con2 =  Connectiond.getconn();
+                         Statement stmt2 = con2.createStatement();
+                         String sql2 = "SELECT id,Value FROM central";
+                         ResultSet rs2 = stmt2.executeQuery(sql2);
+                         int id;
+                         while(rs2.next())
+                        {
+                            id  = rs2.getInt("id");
+                            if(id ==14)
+                            {
+                            
+                                 presentday = rs2.getInt("Value");
+                            
+                             }
+                        }
+    
+                        String sql3 = "SELECT id,ECID,ISAC FROM Customer";
+                        Connection con3 =  Connectiond.getconn();
+                        Statement stmt3 = con3.createStatement();
+                        ResultSet rs3 = stmt3.executeQuery(sql3);
+                        byte[] arr=null;
+                        Vector ecid = new Vector();
+                        int check1 = 0;
+                        int g = 0;
+                        while(rs3.next())
+                       {
+                             check1  = 0;
+                             arr = rs3.getBytes("ECID");
+                             g = rs3.getInt("id");
+                             if(arr!=null)
+                             {
+                                   ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(arr)); 
+                                   ecid = (Vector)o.readObject();
+                                   for(int j=0;j<ecid.size();++j)
+                                  {
+                                        if((long)presentday == (long)ecid.get(j))
+                                         {
+                                              check1  =1;
+                                              break;
+                                         }
+                                  }
+                                  if(check1==1)
+                                  {
+                                     String  sql4="UPDATE customer"+" SET ISAC=1" +" WHERE id="+g;
+                                     Connection con4 = Connectiond.getconn();
+                                     Statement stmt4 = con4.createStatement();
+                                     stmt4.executeUpdate(sql4);
+                                     sql4="SELECT history FROM Customer"+" WHERE id="+g;
+                                     int history=0,present=0;
+                                     double fre=0;
+                                     try {
+                                           ResultSet rsz = stmt4.executeQuery(sql4);
+                                            history = rsz.getInt("history");         
+                                         } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                                 }
+                                     sql4 = "SELECT id,Value FROM central";
+                                     {
+                                        ResultSet rsz = stmt4.executeQuery(sql4);
+                                        double d = 0.0;
+                                        int iad;
+                                        while(rsz.next())
+                                         {
+                                              iad  = rsz.getInt("id");
+                                              if(iad == 9)
+                                              {
+                                                    fre = rsz.getDouble("Value");
+                                               }
+               
+                                          }
+                                      }
+                                     double custfre=history/(int)presentday;
+                                     if(custfre>=fre)
+                                     {
+                                          sql4="SELECT id,Identity FROM Customer"+" WHERE id="+g;
+                                          String sa=null;
+                                          try {
+                                          ResultSet rsz = stmt4.executeQuery(sql4);
+                                          sa= rsz.getString("Identity");         
+                                         } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                                 }
+                                          if(sa==null)
+                                          {
+                                            String s = null;
+                                            sql4 = "SELECT id,Value FROM central";
+                                           {
+                                         ResultSet rsz = stmt4.executeQuery(sql4);
+                                          int iad;
+                                           while(rsz.next())
+                                            {
+                                                iad  = rsz.getInt("id");
+                                                if(iad == 8)
+                                                {
+                                                    s= rsz.getString("value");
+                                                }
+               
+                                            }
+                                           }
+                                           try {
+                                                     String s1=s.substring(1);
+                                                     int i=Integer.parseInt(s1);
+                                                     i=i+1;
+                                                     s1="I"+i;
+                                                     sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
+                                                     stmt4.executeUpdate(sql4);
+                                                      sql4="UPDATE customer"+" SET Identity="+"'"+s1+"'"+" WHERE id="+g;
+                                                     stmt4.executeUpdate(sql4);
+                                                     sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=8";
+                                                      stmt4.executeUpdate(sql4);
+                                              } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                                 }
+                                          }
+                                          else
+                                          {
+                                               sql4 ="UPDATE customer"+" SET I="+"'"+sa+"'"+" WHERE id="+g;
+                                               stmt4.executeUpdate(sql4);
+                                          } 
+                            
+                                     }
+                                     else
+                                     {
+                                         String s=null;
+                                         sql4 = "SELECT id,Value FROM central";
+                                         {
+                                            ResultSet rsz = stmt4.executeQuery(sql4);
+                                            int iad;
+                                            while(rsz.next())
+                                            {
+                                                iad  = rsz.getInt("id");
+                                                if(iad == 7)
+                                                {
+                                                     s= rsz.getString("value");
+                                                }
+               
+                                            }
+                                         }
+                                         try {
+                                          
+                                                String s1=s.substring(1);
+                                                int i=Integer.parseInt(s1);
+                                                i=i+1;
+                                                s1="T"+i;
+                                                sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
+                                                stmt4.executeUpdate(sql4);
+                                                sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=7";
+                                                stmt4.executeUpdate(sql4);
+                                              } catch (SQLException ex) {
+                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                                              }
+                                     }
+                             }
+                        }
+                    }
+                        CateringServices c = new CateringServices();
+                        c.setVisible(true);
+                    }
+                   else{
+                       JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
+                    }
+                    
+                }
+                catch(Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+           
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
