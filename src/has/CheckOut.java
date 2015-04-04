@@ -50,16 +50,68 @@ public class CheckOut extends javax.swing.JFrame {
                System.out.println("in catch");
            }
            int present=0;
-          String sql2 = "SELECT id,Value FROM central";
-                                     
+           double minfre=0;
+                                String sql2 = "SELECT id,Value FROM central";
+                                     Vector tariff = null,discount=null,rates = null,totalbookings = null;
                                          ResultSet rsz = stmt.executeQuery(sql2);
                                           int iad;
                                                   while(rsz.next())
                                                   {
                                                    iad  = rsz.getInt("id");
               
+                                                   if(iad == 9)
+                                                                  {
+                                                                minfre = rsz.getDouble("Value");
+                                                                  }
+                                                   if(iad==10)
+                                                   {
+                                                        ObjectInputStream o = null;
+                                                           byte[] arr = rsz.getBytes("Value");
+                                                         tariff = new Vector();
+                                                     if(arr!=null)
+                                                      {
+                                                             o = new ObjectInputStream(new ByteArrayInputStream(arr));
+                                                              tariff= (Vector)o.readObject();
+                                                       } 
+                                                   }
+                                                   if(iad==11)
+                                                   {
+                                                        ObjectInputStream o = null;
+                                                           byte[] arr = rsz.getBytes("Value");
+                                                        rates = new Vector();
+                                                     if(arr!=null)
+                                                      {
+                                                             o = new ObjectInputStream(new ByteArrayInputStream(arr));
+                                                              rates= (Vector)o.readObject();
+                                                       } 
+                                                   }
+                                                   
+                                                   if(iad==12)
+                                                   {
+                                                        ObjectInputStream o = null;
+                                                           byte[] arr = rsz.getBytes("Value");
+                                                         totalbookings = new Vector();
+                                                     if(arr!=null)
+                                                      {
+                                                             o = new ObjectInputStream(new ByteArrayInputStream(arr));
+                                                              totalbookings= (Vector)o.readObject();
+                                                       } 
+                                                   }
+                                                   
+                                                   if(iad==13)
+                                                   {
+                                                        ObjectInputStream o = null;
+                                                           byte[] arr = rsz.getBytes("Value");
+                                                        discount = new Vector();
+                                                     if(arr!=null)
+                                                      {
+                                                             o = new ObjectInputStream(new ByteArrayInputStream(arr));
+                                                              discount= (Vector)o.readObject();
+                                                       } 
+                                                   }
+                                                   
                                                        if(iad == 14)
-                                                              {
+                                                                  {
                                                                  present = rsz.getInt("Value");
                                                                   }
                
@@ -81,7 +133,7 @@ public class CheckOut extends javax.swing.JFrame {
                 int y=rs.getInt("SCOD");
                 if(present==y)
                 {
-                  double Totalbill=0;
+                  double Totalbill=0,amount=0;
                   ObjectInputStream o = null;
                   byte[] arr = rs.getBytes("Catering");
                    Vector Catering = new Vector();
@@ -108,7 +160,82 @@ public class CheckOut extends javax.swing.JFrame {
                   }
                   sql="UPDATE customer SET ISAC=0 WHERE id= "+rs.getInt("id");
                   stmt.executeUpdate(sql);
+                  int ap=rs.getInt("History")+rs.getInt("SCOD")-rs.getInt("SCID"),ap1=+rs.getInt("SCOD")-rs.getInt("SCID");
+                   sql="UPDATE customer SET history="+ap+" WHERE id= "+rs.getInt("id");
+                  stmt.executeUpdate(sql);
+                  int to=0;
+                  String room=rs.getString("Room");
+                  String roompart=room.substring(0,1);
                   
+                 double roomrent=0,tariffa=0,dicounta=0,advance=0;
+                  advance=rs.getDouble("RTP");
+                  if(roompart.equalsIgnoreCase("SA")){
+                      amount=ap1*(double) rates.elementAt(0);
+                      roomrent=amount;
+                       amount=amount+Totalbill;
+                       tariffa=(amount*(double)tariff.elementAt(0))/100;
+                       amount=amount+tariffa;
+                       to=(int) totalbookings.elementAt(0);
+                       to=to+ap;
+                       totalbookings.setElementAt(to,0);
+                       
+                  }
+                  
+                  if(roompart.equalsIgnoreCase("SNA"))amount=(double) rates.elementAt(1);
+                  {
+                       amount=ap1*(double) rates.elementAt(1);
+                       roomrent=amount;
+                       amount=amount+Totalbill;
+                        tariffa=(amount*(double)tariff.elementAt(1))/100;
+                       amount=amount+(amount*(double)tariff.elementAt(1))/100;
+                       to=(int) totalbookings.elementAt(1);
+                       to=to+ap;
+                       totalbookings.setElementAt(to,1);
+                  }
+                  if(roompart.equalsIgnoreCase("DA"))
+                  {
+                       amount=ap1*(double) rates.elementAt(2);
+                        roomrent=amount;
+                       amount=amount+Totalbill;
+                       tariffa=(amount*(double)tariff.elementAt(2))/100;
+                       amount=amount+(amount*(double)tariff.elementAt(2))/100;
+                       to=(int) totalbookings.elementAt(2);
+                       to=to+ap;
+                       totalbookings.setElementAt(to,2);
+                  }
+                  if(roompart.equalsIgnoreCase("DNA"))
+                  {
+                      amount=ap1*(double) rates.elementAt(3);
+                      roomrent=amount;
+                       amount=amount+Totalbill;
+                        tariffa=(amount*(double)tariff.elementAt(3))/100;
+                       amount=amount+(amount*(double)tariff.elementAt(3))/100;
+                       to=(int) totalbookings.elementAt(3);
+                       to=to+ap;
+                       totalbookings.setElementAt(to,3);
+                  }
+                  String updatestr = "UPDATE central SET Value = ?  WHERE id =12 ";
+                                                         PreparedStatement p = conn.prepareStatement(updatestr);
+                                                         p.setObject(1,totalbookings);
+                                                         p.executeUpdate();
+                 int history=rs.getInt("history");
+                 double cusfre=history/present;
+                 double minfree=(double) discount.elementAt(0);
+                 double minbill=(double) discount.elementAt(1);
+                 double d1=(double) discount.elementAt(2);
+                 double d2=(double) discount.elementAt(3);
+                 double d3=(double) discount.elementAt(4);
+                 double d4=(double) discount.elementAt(5);
+                
+                 if(cusfre<minfree && amount<minbill)
+                 {
+                     
+                 }
+                     
+                     
+                     
+                  tb.addRow(new Object[]{new String(rs.getString("Name")),new String(rs.getString("I")),new Double(advance),new Double(roomrent),new Double(tariffa)});
+
 
                 }
               }
@@ -195,7 +322,7 @@ public class CheckOut extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 30, 510, 210);
+        jScrollPane1.setBounds(20, 30, 740, 210);
 
         jTable2.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -203,19 +330,21 @@ public class CheckOut extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Customer Name", "Unique Number", "Total Bill", "Amount to be paid"
+                "Customer Name", "Unique Number", "Total Catering Bill", "Advance", "Room Rent", "Tariff", "Discount", "Final Bill"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(22, 260, 510, 180);
+        jScrollPane2.setBounds(12, 260, 750, 180);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
