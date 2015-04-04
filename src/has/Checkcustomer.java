@@ -5,7 +5,9 @@
  */
 package has;
 
-import static has.Checkavailable.url;
+import static has.Url.url;
+import static has.Url.user;
+import static has.Url.password;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,9 +19,7 @@ import java.sql.Statement;
  * @author SivaKesava1
  */
 public class Checkcustomer {
-    static String url = "jdbc:mysql://10.117.13.121:3306/dbhas";
-      static String password = "89878";
-      static String user = "kkk"; 
+    
     public static int check(String name,String mobile,String address) throws SQLException
     {
          Statement stmt = null;

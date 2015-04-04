@@ -5,7 +5,7 @@
  */
 package has;
 
-import static has.Checkavailable.url;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
@@ -24,6 +24,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
+import static has.Url.url;
+import static has.Url.user;
+import static has.Url.password;
 import java.util.logging.Logger;
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -36,9 +39,7 @@ public class advancebooking extends javax.swing.JFrame {
     /**
      * Creates new form advancebooking
      */
-    static String url = "jdbc:mysql://10.117.13.121:3306/dbhas";
-      static String password = "89878";
-      static String user = "kkk"; 
+   
     public advancebooking() {
         initComponents();
         jLabel5.setVisible(false);
@@ -141,7 +142,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
                   } 
                  // Vector Advance_room= (Vector)o.readObject();
                  
-                       Advance_room.add("SNA567");
+                       Advance_room.add(room);
                   
                  String updatestr = "UPDATE customer SET Advance_room = ?  WHERE id = "+id1;
                  PreparedStatement p = conn.prepareStatement(updatestr);
@@ -466,6 +467,19 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Connection conn = null;        
+          Statement stmt=null;          
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (SQLException ex) {
+           // Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error in conn");
+        }
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException ex) {
+            //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+        }
   String str1,str2,str3,str4 = null;
       str1=jTextField1.getText();
       if(str1.length()==0)
@@ -482,13 +496,13 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
           jLabel7.setVisible(true);
       else
           jLabel7.setVisible(false);
-      str4=jTextField4.getText();
+      str4=jTextField6.getText();
       if(str4.length()==0)
           jLabel11.setVisible(true);
       else
           jLabel11.setVisible(false);
       if(str1.length()!=0 && str2.length()!=0 && str3.length()!=0 && str4.length()!=0)
-      {int g = 0;
+      {   int g = 0;
             try {
                 
                 g=Checkcustomer.check(str1,str3,str2);
@@ -496,6 +510,56 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
                 } catch (SQLException ex) {
                 Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            try{
+              String sql = "SELECT id,ECID,ECOD,ISAC FROM Customer";
+              ResultSet rs = stmt.executeQuery(sql);
+              int id;
+              String property;
+              while(rs.next())
+              {
+               id  = rs.getInt("id");
+               int is=rs.getInt("ISAC");
+               if(is!=0)
+               {
+                   showMessageDialog(null, "You have already checked In  ");
+                   return;
+               }
+               if(id == g)
+               {
+                  
+                    ObjectInputStream o = null;
+                  byte[] arr = rs.getBytes("ECID");
+                   Vector ECID = new Vector();
+                  if(arr!=null)
+                  {
+                      o = new ObjectInputStream(new ByteArrayInputStream(arr));
+                        ECID= (Vector)o.readObject();
+                  } 
+                 byte[] arr2 = rs.getBytes("ECOD");
+                   Vector ECOD = new Vector();
+                  if(arr!=null)
+                  {
+                      o = new ObjectInputStream(new ByteArrayInputStream(arr2));
+                       ECOD= (Vector)o.readObject();
+                  }
+                  for(int y=0;y<ECID.size();y++)
+                  {
+                     if(b< ((long)ECID.get(y))||a>((long)ECOD.get(y)))
+                     {
+                         
+                     }
+                     else
+                     {
+                         showMessageDialog(null, "You have already Booked during that period  ");
+                     return;
+                     }
+                  }
+              }
+              }
+              }catch(Exception ex)
+                       {
+                       
+                       }
          
       try {
           System.out.println(room);
@@ -725,6 +789,10 @@ dispose();
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField6.setText("");
+        jLabel4.setVisible(false);
+        jLabel7.setVisible(false);
+        jLabel9.setVisible(false);
+        jLabel11.setVisible(false);
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
