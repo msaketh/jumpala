@@ -335,7 +335,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
             }
         });
         jPanel1.add(jTextField4);
-        jTextField4.setBounds(270, 80, 120, 25);
+        jTextField4.setBounds(270, 80, 120, 30);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
@@ -374,7 +374,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(250, 380, 105, 30);
+        jButton3.setBounds(250, 380, 110, 30);
 
         jButton4.setFont(new java.awt.Font("Vijaya", 0, 20)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 102));
@@ -399,7 +399,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
         jTextField5.setFont(jTextField4.getFont());
         jTextField5.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 153, 153), null));
         jPanel1.add(jTextField5);
-        jTextField5.setBounds(440, 80, 130, 25);
+        jTextField5.setBounds(440, 80, 130, 30);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/calendar_icon.png"))); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -519,14 +519,16 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
               {
                id  = rs.getInt("id");
                int is=rs.getInt("ISAC");
-               if(is!=0)
+                  System.out.println("ISAC"+is);
+                  System.out.println("Id"+id+"  g"+g);
+               
+               if(id == g)
+               {
+                  if(is!=0)
                {
                    showMessageDialog(null, "You have already checked In  ");
                    return;
                }
-               if(id == g)
-               {
-                  
                     ObjectInputStream o = null;
                   byte[] arr = rs.getBytes("ECID");
                    Vector ECID = new Vector();

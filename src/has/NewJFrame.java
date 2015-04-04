@@ -286,7 +286,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             }
                                 if(found==1)
                                 {
-                                    System.out.println("Entered");
+                                  //  System.out.println("Entered");
                                    
                                     int x=(int)a;
                                     int uj=(int)b;
