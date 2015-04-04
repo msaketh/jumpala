@@ -2,7 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -31,7 +31,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="474" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -69,7 +69,7 @@
                   </Border>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Monotype Corsiva" size="24" style="0"/>
+                  <Font name="Monotype Corsiva" size="18" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="0">
@@ -108,8 +108,8 @@
                     <Column editable="true" title="Total Catering Bill" type="java.lang.Object"/>
                     <Column editable="true" title="Advance" type="java.lang.Object"/>
                     <Column editable="true" title="Room Rent" type="java.lang.Object"/>
-                    <Column editable="true" title="Tariff" type="java.lang.Object"/>
-                    <Column editable="true" title="Discount" type="java.lang.Object"/>
+                    <Column editable="true" title="Tariff Amt" type="java.lang.Object"/>
+                    <Column editable="true" title="Discount Amt" type="java.lang.Object"/>
                     <Column editable="true" title="Final Bill" type="java.lang.Object"/>
                   </Table>
                 </Property>

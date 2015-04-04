@@ -61,7 +61,7 @@ public class Checkcustomer {
          rs.close();
         if(w==0)
          {
-             sql="INSERT INTO Customer(name,mobile,address,ISAC)"+" VALUES ('"+name+"','"+mobile+"','"+address+"'"+"0)";
+             sql="INSERT INTO Customer(name,mobile,address,ISAC)"+" VALUES ('"+name+"','"+mobile+"','"+address+"',"+"0)";
           //  System.out.println(sql);
              stmt.executeUpdate(sql);
              return j+1;

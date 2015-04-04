@@ -425,7 +425,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Advance");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(150, 290, 86, 30);
+        jLabel10.setBounds(140, 290, 140, 30);
 
         jTextField6.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
         jTextField6.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 0, 153), null));
@@ -601,30 +601,36 @@ dispose();
         
    			cd.btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					String s;
-                                        Calendar cz=Calendar.getInstance();
-                                        cz.set(calendar.year,calendar.month, calendar.date);
-                                        if((cz.getTimeInMillis()-System.currentTimeMillis())<0)
-                                        {
-                                     showMessageDialog(null, "This is a past date  ");
-                                     jButton6.setEnabled(false);
-                                     jTextField4.setText("");
-                                     return;
-                                        }
-                                        long a=(cz.getTimeInMillis())- (System.currentTimeMillis());
-                                        a=a/1000;
-                                        a=a/60;
-                                        a=a/60;
-                                        a=a/24;
-                                        if(a>60)
-                                        {
-                                             showMessageDialog(null, "Advanced Booking is not allowed for that period  ");
-                                            jButton6.setEnabled(false);
-                                             return;
-                                        }
-						s=(calendar.date.toString())+"-"+(((Integer)(calendar.month+1)).toString())+"-"+(calendar.year.toString()) ;
-							jTextField4.setText(s);
-                                                        jButton6.setEnabled(true);
+                                            String s;
+                                            Calendar cz=Calendar.getInstance();
+                                            cz.set(calendar.year,calendar.month, calendar.date);
+                                            if((cz.getTimeInMillis()-System.currentTimeMillis())<0)
+                                            {
+                                                showMessageDialog(null, "This is a past date  ");
+                                                jButton6.setEnabled(false);
+                                                jTextField4.setText("");
+                                                return;
+                                            }
+                                            long a=(cz.getTimeInMillis())- (System.currentTimeMillis());
+                                            a=a/1000;
+                                            a=a/60;
+                                            a=a/60;
+                                            a=a/24;
+                                            if(a>60)
+            {
+                showMessageDialog(null, "Advanced Booking is not allowed for that period  ");
+                jButton6.setEnabled(false);
+                return;
+            }
+                                            if(a==0)
+            {
+                showMessageDialog(null, "Advanced Booking is not allowed for today  ");
+                jButton6.setEnabled(false);
+                return;
+            }
+                                            s=(calendar.date.toString())+"-"+(((Integer)(calendar.month+1)).toString())+"-"+(calendar.year.toString()) ;
+                                            jTextField4.setText(s);
+                                            jButton6.setEnabled(true);
 						}           
 					});
 				  cd.setVisible(true);
@@ -690,94 +696,104 @@ dispose();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-          Connection conn = null;
-          jButton5.setEnabled(false);
-                jButton6.setEnabled(false);
-          Statement stmt=null;
-          
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-        } catch (SQLException ex) {
-           // Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Error in conn");
-        }
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException ex) {
-            //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String sql="SELECT id,Value FROM Central"+" WHERE id=14";
-         int presentday = 1;
-        try {
+        try {                                         
+            // TODO add your handling code here:
+            Connection conn = null;
+            jButton5.setEnabled(false);
+            jButton6.setEnabled(false);
+            Statement stmt=null;
+            
+            try {
+                conn = DriverManager.getConnection(url, user, password);
+            } catch (SQLException ex) {
+                // Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Error in conn");
+            }
+            try {
+                stmt = conn.createStatement();
+            } catch (SQLException ex) {
+                //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String sql = "SELECT id,Value FROM central";
             ResultSet rs = stmt.executeQuery(sql);
-            presentday = rs.getInt("Value");
-        } catch (SQLException ex) {
-           //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+            int id;
+            int presentday = 1;
+            while(rs.next())
+            {
+                id  = rs.getInt("id");
+                if(id ==14)
+                {
+                    
+                    presentday = rs.getInt("Value");
+                    
+                }
+            }
+            
             a=(cal.getTimeInMillis())- (System.currentTimeMillis());
-                                        a=a/1000; a=a/60;a=a/60; a=a/24;
+            a=a/1000; a=a/60;a=a/60; a=a/24;
             b=(cal1.getTimeInMillis())- (System.currentTimeMillis());  
             b=b/1000;b=b/3600;b=b/24;
             
-        try {
-            /*System.out.println((int)a+presentday);
-            System.out.println((int) b+presentday);
-              System.out.println(z);*/
-            a=a+presentday;
-            b=b+presentday;
-               room= Checkavailable.check((int)a,(int) b,z );
-            // System.out.println(room);
+            try {
+                /*System.out.println((int)a+presentday);
+                System.out.println((int) b+presentday);
+                System.out.println(z);*/
+                a=a+presentday;
+                b=b+presentday;
+                room= Checkavailable.check((int)a,(int) b,z );
+                // System.out.println(room);
+            } catch (SQLException ex) {
+                Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(room!=null)
+            {
+                jLabel5.setVisible(true);
+                jButton1.setVisible(true);
+                jButton2.setVisible(true);
+                jButton3.setVisible(true);
+                jLabel6.setVisible(true);
+                jLabel8.setVisible(true);
+                jTextField6.setVisible(true);
+                jLabel10.setVisible(true);
+                jLabel11.setVisible(false);
+                jLabel4.setVisible(false);
+                jLabel9.setVisible(false);
+                jLabel7.setVisible(false);
+                jComboBox1.setEditable(false);
+                jButton5.setEnabled(false);
+                jButton5.setEnabled(false);
+                jTextField1.setVisible(true);
+                jTextField2.setVisible(true);
+                jTextField3.setVisible(true);
+            }
+            else
+            {
+                showMessageDialog(null, "Please Try for other Duration  ");
+                jLabel5.setVisible(false);
+                jButton1.setVisible(false);
+                jButton2.setVisible(false);
+                jButton3.setVisible(false);
+                jButton5.setEnabled(true);
+                jTextField6.setVisible(false);
+                jLabel10.setVisible(false);
+                jLabel11.setVisible(false);
+                jButton6.setEnabled(false);
+                jLabel6.setVisible(false);
+                jLabel8.setVisible(false);
+                jLabel4.setVisible(false);
+                jLabel9.setVisible(false);
+                jLabel7.setVisible(false);
+                jButton1.setVisible(false);
+                jButton7.setVisible(false);
+                jButton2.setVisible(false);
+                jButton3.setVisible(false);
+                jButton6.setEnabled(false);
+                jTextField1.setVisible(false);
+                jTextField2.setVisible(false);
+                jTextField3.setVisible(false);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(room!=null)
-        {
-        jLabel5.setVisible(true);
-        jButton1.setVisible(true);
-        jButton2.setVisible(true);
-        jButton3.setVisible(true);
-        jLabel6.setVisible(true);
-        jLabel8.setVisible(true);
-        jTextField6.setVisible(true);
-        jLabel10.setVisible(true);
-        jLabel11.setVisible(false);
-        jLabel4.setVisible(false);
-        jLabel9.setVisible(false);
-        jLabel7.setVisible(false);
-        jComboBox1.setEditable(false);
-        jButton5.setEnabled(false);
-        jButton5.setEnabled(false);
-        jTextField1.setVisible(true);
-        jTextField2.setVisible(true);
-        jTextField3.setVisible(true);
-        }
-        else
-        {
-      	showMessageDialog(null, "Please Try for other Duration  ");
-        jLabel5.setVisible(false);
-        jButton1.setVisible(false);
-        jButton2.setVisible(false);
-        jButton3.setVisible(false);
-        jButton5.setEnabled(true);
-        jTextField6.setVisible(false);
-        jLabel10.setVisible(false);
-        jLabel11.setVisible(false);
-        jButton6.setEnabled(false);
-        jLabel6.setVisible(false);
-        jLabel8.setVisible(false);
-        jLabel4.setVisible(false);
-        jLabel9.setVisible(false);
-        jLabel7.setVisible(false);
-        jButton1.setVisible(false);
-        jButton7.setVisible(false);
-        jButton2.setVisible(false);
-        jButton3.setVisible(false);
-        jButton6.setEnabled(false);
-        jTextField1.setVisible(false);
-        jTextField2.setVisible(false);
-        jTextField3.setVisible(false);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 

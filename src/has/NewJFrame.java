@@ -18,6 +18,7 @@ import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 /**
  *
@@ -163,7 +164,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1.add(jLabel10);
         jLabel10.setBounds(10, 14, 460, 20);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("F:\\SEMESTER-4\\Software\\Java\\jumpala\\src\\has\\Cool-Eco-PowerPoint-Templates.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/Cool-Eco-PowerPoint-Templates.jpg"))); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 600, 430);
 
@@ -435,6 +436,8 @@ public class NewJFrame extends javax.swing.JFrame {
                                      }
                                      
                                       advancebooking.updateroom(room, (int)a,(int) b, d);
+                                      JOptionPane.showMessageDialog(rootPane,"Successfully checked in");
+                                      dispose();
                                 }
                         }catch(Exception ex)
                         {

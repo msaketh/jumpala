@@ -133,7 +133,7 @@ public class calendar extends javax.swing.JFrame {
 		contentPane.add(btnSave);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("F:\\SEMESTER-4\\Software\\Java\\Travel\\abstract-calendar-time-background-28797455 - Copy.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("/has/cal.png"));
 		lblNewLabel.setBounds(-51, -213, 664, 425);
 		contentPane.add(lblNewLabel);
 	}

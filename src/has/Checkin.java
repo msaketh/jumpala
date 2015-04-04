@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javax.swing.JOptionPane.showMessageDialog;
 /**
  *
@@ -58,7 +59,7 @@ public class Checkin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Monotype Corsiva", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 0));
         jLabel2.setText("Select the type of Room");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
@@ -90,13 +91,13 @@ public class Checkin extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 140, 30));
 
-        jButton5.setIcon(new javax.swing.ImageIcon("F:\\SEMESTER-4\\Software\\Java\\Travel\\calendar_icon.png")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/calendar_icon.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, 30));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 30, 30));
 
         jButton7.setFont(new java.awt.Font("Vijaya", 1, 18)); // NOI18N
         jButton7.setForeground(new java.awt.Color(0, 153, 153));
@@ -109,10 +110,11 @@ public class Checkin extends javax.swing.JFrame {
         jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 0));
         jLabel3.setText("Expected Check Out Date");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 250, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("F:\\SEMESTER-4\\Software\\Java\\jumpala\\Ibis-Luton-reception-1.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/Ibis-Luton-reception-1.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,62 +187,75 @@ public class Checkin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        Connection conn = null;
-        jButton5.setEnabled(false);
-       
-        Statement stmt=null;
-
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-        } catch (SQLException ex) {
-            // Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Error in conn");
-        }
-        try {
-            stmt = conn.createStatement();
-        } catch (SQLException ex) {
-            //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String sql="SELECT id,Value FROM Central"+" WHERE id=14";
-        int presentday = 1;
-        try {
-            ResultSet rs = stmt.executeQuery(sql);
-            presentday = rs.getInt("Value");
-        } catch (SQLException ex) {
-            //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        cal=(Calendar) datecalendar.c.clone();
-        b=(cal.getTimeInMillis())- (System.currentTimeMillis());  
-            b=b/1000;b=b/3600;b=b/24;
-
-        try {
-            /*
-            System.out.println((int) b+presentday);
-            System.out.println(z);
-            System.out.println(presentday);*/
-            a=presentday;
-            b=b+presentday;
-            room= Checkavailable.check(presentday,(int) b,z );
-            // System.out.println(room);
-        } catch (SQLException ex) {
-        //    Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(room!=null)
-        {
-           
-         // new Checkinlink(a,b,room,z).setVisible(true);
-        //  ck.setVisible(true);
-            new NewJFrame(a,b,room,z).setVisible(true);
-            dispose();
-        }
-        else
-        {
-            showMessageDialog(null, "Please Try for other Duration  ");
-            jButton5.setEnabled(true);
-            jTextField4.setText("");
-             jButton7.setVisible(false);
+        try {                                         
+            // TODO add your handling code here:
+            Connection conn = null;
+            jButton5.setEnabled(false);
             
+            Statement stmt=null;
+            
+            try {
+                conn = DriverManager.getConnection(url, user, password);
+            } catch (SQLException ex) {
+                // Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Error in conn");
+            }
+            try {
+                stmt = conn.createStatement();
+            } catch (SQLException ex) {
+                //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String sql12 = "SELECT id,Value FROM central";
+            ResultSet rs12 = stmt.executeQuery(sql12);
+            int id;
+            int presentday = 1;
+            while(rs12.next())
+            {
+                id  = rs12.getInt("id");
+                if(id ==14)
+                {
+                    
+                    presentday = rs12.getInt("Value");
+                    
+                }
+            }
+            cal=(Calendar) datecalendar.c.clone();
+            b=(cal.getTimeInMillis())- (System.currentTimeMillis());  
+            b=b/1000;b=b/3600;b=b/24;
+            
+            try {
+                /*
+                System.out.println((int) b+presentday);
+                System.out.println(z);
+                System.out.println(presentday);*/
+                a=presentday;
+                b=b+presentday;
+                System.out.println(a);
+                System.out.println(b);
+                System.out.println(z);
+                room= Checkavailable.check(presentday,(int) b,z );
+                // System.out.println(room);
+            } catch (SQLException ex) {
+                //    Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(room!=null)
+            {
+                
+                // new Checkinlink(a,b,room,z).setVisible(true);
+                //  ck.setVisible(true);
+                new NewJFrame(a,b,room,z).setVisible(true);
+                dispose();
+            }
+            else
+            {
+                showMessageDialog(null, "Please Try for other Duration  ");
+                jButton5.setEnabled(true);
+                jTextField4.setText("");
+                jButton7.setVisible(false);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Checkin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 

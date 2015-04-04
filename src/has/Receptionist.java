@@ -29,7 +29,6 @@ public class Receptionist extends javax.swing.JFrame {
 
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -45,7 +44,7 @@ public class Receptionist extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 130, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 130, -1));
 
         jButton5.setForeground(new java.awt.Color(0, 102, 204));
         jButton5.setText("LOG OUT");
@@ -54,18 +53,24 @@ public class Receptionist extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 130, -1));
-
-        jButton3.setForeground(new java.awt.Color(0, 51, 204));
-        jButton3.setText("CHECK OUT");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 130, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 130, -1));
 
         jButton2.setForeground(new java.awt.Color(0, 51, 204));
         jButton2.setText("CHECK IN");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 130, -1));
 
         jButton1.setForeground(new java.awt.Color(0, 51, 204));
         jButton1.setText("ADVANCE BOOKING");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\Receptionist.jpg")); // NOI18N
@@ -86,6 +91,16 @@ public class Receptionist extends javax.swing.JFrame {
         Refresh.refresh();
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        advancebooking a = new advancebooking();
+        a.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Checkin c = new Checkin();
+        c.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,7 +140,6 @@ public class Receptionist extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;

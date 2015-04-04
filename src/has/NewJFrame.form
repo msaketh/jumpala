@@ -281,7 +281,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="F:\SEMESTER-4\Software\Java\jumpala\src\has\Cool-Eco-PowerPoint-Templates.jpg"/>
+              <Image iconType="3" name="/has/Cool-Eco-PowerPoint-Templates.jpg"/>
             </Property>
           </Properties>
           <Constraints>

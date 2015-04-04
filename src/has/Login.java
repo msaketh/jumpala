@@ -307,6 +307,9 @@ public class Login extends javax.swing.JFrame {
                              }
                         }
                     }
+                        CheckOut c = new CheckOut();
+                        c.setVisible(true);
+                        
                         ManagerFunctions m = new ManagerFunctions();
                         m.setVisible(true);
                     }
@@ -480,8 +483,12 @@ public class Login extends javax.swing.JFrame {
                              }
                         }
                     }
-                    Receptionist r  = new Receptionist();
-                    r.setVisible(true);
+                    CheckOut c = new CheckOut();
+                        c.setVisible(true);
+                        
+                        
+                        Receptionist r  = new Receptionist();
+                        r.setVisible(true);
                     }
                    else{
                        JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
@@ -653,6 +660,10 @@ public class Login extends javax.swing.JFrame {
                              }
                         }
                     }
+                        CheckOut cc = new CheckOut();
+                        cc.setVisible(true);
+                        
+                        
                         CateringServices c = new CateringServices();
                         c.setVisible(true);
                     }

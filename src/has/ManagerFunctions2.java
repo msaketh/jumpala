@@ -36,6 +36,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton6 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -48,6 +49,14 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
         setBackground(new java.awt.Color(51, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton6.setText("logout");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+
         jButton3.setForeground(new java.awt.Color(0, 102, 204));
         jButton3.setText("CHANGE USERNAME/PASSWORD");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -55,7 +64,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 230, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 230, -1));
 
         jButton1.setBackground(new java.awt.Color(102, 204, 255));
         jButton1.setForeground(new java.awt.Color(0, 102, 204));
@@ -65,7 +74,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 230, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 230, -1));
 
         jButton2.setBackground(new java.awt.Color(102, 204, 255));
         jButton2.setForeground(new java.awt.Color(0, 102, 204));
@@ -75,7 +84,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 230, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 230, -1));
 
         jButton4.setBackground(new java.awt.Color(102, 204, 255));
         jButton4.setForeground(new java.awt.Color(0, 102, 204));
@@ -85,7 +94,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 230, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 230, -1));
 
         jButton5.setBackground(new java.awt.Color(102, 204, 255));
         jButton5.setForeground(new java.awt.Color(0, 102, 204));
@@ -95,7 +104,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 230, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 230, -1));
 
         jLabel2.setBackground(new java.awt.Color(102, 204, 255));
         jLabel2.setForeground(new java.awt.Color(0, 102, 204));
@@ -132,6 +141,11 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
         ChangeUAP c = new ChangeUAP();
         c.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Refresh.refresh();
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +188,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

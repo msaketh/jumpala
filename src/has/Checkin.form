@@ -45,7 +45,7 @@
               <Font name="Monotype Corsiva" size="24" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
+              <Color blue="0" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Select the type of Room"/>
           </Properties>
@@ -122,7 +122,7 @@
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="F:\SEMESTER-4\Software\Java\Travel\calendar_icon.png"/>
+              <Image iconType="3" name="/has/calendar_icon.png"/>
             </Property>
           </Properties>
           <Events>
@@ -130,7 +130,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="160" y="240" width="-1" height="30"/>
+              <AbsoluteConstraints x="160" y="240" width="30" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -158,6 +158,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monotype Corsiva" size="24" style="0"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Expected Check Out Date"/>
           </Properties>
           <Constraints>
@@ -169,7 +172,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="F:\SEMESTER-4\Software\Java\jumpala\Ibis-Luton-reception-1.jpg"/>
+              <Image iconType="3" name="/has/Ibis-Luton-reception-1.jpg"/>
             </Property>
           </Properties>
           <Constraints>
