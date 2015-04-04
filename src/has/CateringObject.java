@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class CateringObject implements Serializable {
     
     String date;
-    int bill;
+    double bill;
     String item;
     int quantity;
 }

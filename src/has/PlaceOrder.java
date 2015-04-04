@@ -113,7 +113,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         String s2 = (String)t2.getText();
         String s3 = (String)t3.getText();
         String item1 = (String)c1.getSelectedItem();
-        int bill = 0;
+        double bill = 0.0;
         try
         {
             int check = CheckCustomer2.check(s2, s3);
@@ -176,7 +176,7 @@ public class PlaceOrder extends javax.swing.JFrame {
                             String t = rs2.getString("Item");
                             if(t.equalsIgnoreCase(item1))
                             {
-                                bill = rs2.getInt("Price");
+                                bill = rs2.getDouble("Price");
                             }
                
                         }
@@ -185,10 +185,11 @@ public class PlaceOrder extends javax.swing.JFrame {
                         cc.quantity = quan;
                         cc.item =item1;
                         catering.add(cc);
-                        String updatestr = "UPDATE Customer SET Value = ?  WHERE id = "+check;
+                        String updatestr = "UPDATE Customer SET Catering = ?  WHERE id = "+check;
                         PreparedStatement p = Connectiond.getconn().prepareStatement(updatestr);
                         p.setObject(1,catering);
                         p.executeUpdate();
+                        JOptionPane.showMessageDialog(rootPane,"Successfully updated");
                     }
                     else
                     {
@@ -208,6 +209,7 @@ public class PlaceOrder extends javax.swing.JFrame {
                             if(t.equalsIgnoreCase(item1))
                             {
                                 bill = rs2.getInt("Price");
+                                System.out.println("Entered");
                             }
                
                         }
@@ -216,10 +218,11 @@ public class PlaceOrder extends javax.swing.JFrame {
                         cc.quantity = quan;
                         cc.item =item1;
                         catering.add(cc);
-                        String updatestr = "UPDATE Customer SET Value = ?  WHERE id = "+check;
+                        String updatestr = "UPDATE Customer SET Catering = ?  WHERE id = "+check;
                         PreparedStatement p = Connectiond.getconn().prepareStatement(updatestr);
                         p.setObject(1,catering);
                         p.executeUpdate();
+                        JOptionPane.showMessageDialog(rootPane,"succedfully placed");
                     }
                 }
             }

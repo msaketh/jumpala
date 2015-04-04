@@ -37,6 +37,7 @@ public class ChangeUAP extends javax.swing.JFrame {
         t2 = new javax.swing.JTextField();
         t3 = new javax.swing.JTextField();
         c1 = new javax.swing.JComboBox();
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -46,13 +47,30 @@ public class ChangeUAP extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        t1.setForeground(new java.awt.Color(0, 102, 204));
         getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 160, 30));
+
+        t2.setForeground(new java.awt.Color(0, 102, 204));
         getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 160, 30));
+
+        t3.setForeground(new java.awt.Color(0, 102, 204));
         getContentPane().add(t3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 160, 30));
 
+        c1.setForeground(new java.awt.Color(0, 102, 204));
         c1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MANAGER", "RECEPTIONIST", "CATERING SERVICES" }));
         getContentPane().add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 160, 30));
 
+        jButton2.setForeground(new java.awt.Color(0, 102, 204));
+        jButton2.setText("BACK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
+
+        jButton1.setForeground(new java.awt.Color(0, 102, 204));
         jButton1.setText("CHANGE");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,15 +79,19 @@ public class ChangeUAP extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, -1, -1));
 
+        jLabel5.setForeground(new java.awt.Color(0, 102, 204));
         jLabel5.setText("NEW PASSWORD:-");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
+        jLabel4.setForeground(new java.awt.Color(0, 102, 204));
         jLabel4.setText("NEW USERNAME:-");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
+        jLabel3.setForeground(new java.awt.Color(0, 102, 204));
         jLabel3.setText("YOUR OLD PASSWORD:-");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
+        jLabel2.setForeground(new java.awt.Color(0, 102, 204));
         jLabel2.setText("CHANGE U/P OF:-");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
@@ -221,6 +243,10 @@ public class ChangeUAP extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,6 +285,7 @@ public class ChangeUAP extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox c1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

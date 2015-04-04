@@ -35,7 +35,9 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         c1 = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         t2 = new javax.swing.JTextField();
@@ -43,6 +45,8 @@ public class Login extends javax.swing.JFrame {
         t1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+
+        jInternalFrame1.setVisible(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,21 +57,26 @@ public class Login extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
+
+        jLabel5.setFont(jLabel5.getFont().deriveFont((jLabel5.getFont().getStyle() | java.awt.Font.ITALIC) | java.awt.Font.BOLD));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel5.setText("WELCOME TO HOTEL AUTOMATION SOFTWARE");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         c1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MANAGER", "RECEPTIONIST", "CATERING SERVICES" }));
-        getContentPane().add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 140, -1));
+        getContentPane().add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 140, -1));
 
         jLabel4.setText("LOGIN AS:-");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
-        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 140, 30));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 20));
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 140, 30));
 
         jLabel3.setText("PASSWORD:-");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
-        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 140, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 140, 30));
 
         jLabel2.setText("USERNAME:-");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\Hotel1.jpg")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 420));
@@ -209,10 +218,12 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox c1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField t1;
     private javax.swing.JTextField t2;
     // End of variables declaration//GEN-END:variables

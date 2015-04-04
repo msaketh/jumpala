@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package has;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.sql.*;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -84,6 +88,8 @@ public class AddRooms extends javax.swing.JFrame {
     private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
         String str = (String)type.getSelectedItem();
         String p = t1.getText();
+        String pp;
+        byte[] arr;
         if(p.equals(""))
         {
             JOptionPane.showMessageDialog(rootPane,"Please enter room number");
@@ -93,10 +99,34 @@ public class AddRooms extends javax.swing.JFrame {
             try {
                 Connection con = Connectiond.getconn();
                 Statement stmt = con.createStatement();
-                p = "SA"+p;
-                String sql = "INSERT INTO roomsa(RoomNo)"+"Values('"+p+"')";
-                stmt.executeUpdate(sql);
-                JOptionPane.showMessageDialog(rootPane,"Successfully Added");
+                String sql2 = "SELECT RoomNo FROM roomsa";
+                ResultSet rs = stmt.executeQuery(sql2);
+                int m = 0;
+                pp = "SA"+p;
+                while(rs.next())
+                {
+                    
+                    
+                    String t = rs.getString("RoomNo");
+                    if(t.equalsIgnoreCase(pp))
+                    {
+                        m = 1;
+                        break;
+                    }
+               
+                }
+                if(m==1)
+                {
+                    JOptionPane.showMessageDialog(rootPane,"Room with that room no already exists...please give another number");
+                    t1.setText(" ");
+                }
+                else
+                {
+                    p = "SA"+p;
+                    String sql = "INSERT INTO roomsa(RoomNo)"+"Values('"+p+"')";
+                    stmt.executeUpdate(sql);
+                    JOptionPane.showMessageDialog(rootPane,"Successfully Added");
+                }
                 
             } catch (SQLException ex) {
                 Logger.getLogger(AddRooms.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,13 +134,36 @@ public class AddRooms extends javax.swing.JFrame {
         }
         else if(str.equals("SINGLE-NONAC"))
         {
+            
             try {
                 Connection con = Connectiond.getconn();
                 Statement stmt = con.createStatement();
-                p = "SNA"+p;
-                String sql = "INSERT INTO roomsna(RoomNo)"+"Values('"+p+"')";
-                stmt.executeUpdate(sql);
-                JOptionPane.showMessageDialog(rootPane,"Successfully Added");
+                String sql2 = "SELECT RoomNo FROM roomsna";
+                ResultSet rs = stmt.executeQuery(sql2);
+                int m = 0;
+                pp = "SNA"+p;
+                while(rs.next())
+                {
+                    String t = rs.getString("RoomNo");
+                    if(t.equalsIgnoreCase(pp))
+                    {
+                        m = 1;
+                        break;
+                    }
+               
+                }
+                if(m==1)
+                {
+                    JOptionPane.showMessageDialog(rootPane,"Room with that room no already exists...please give another number");
+                    t1.setText(" ");
+                }
+                else
+                {
+                    p = "SNA"+p;
+                    String sql = "INSERT INTO roomsna(RoomNo)"+"Values('"+p+"')";
+                    stmt.executeUpdate(sql);
+                    JOptionPane.showMessageDialog(rootPane,"Successfully Added");
+                }
                 
             } catch (SQLException ex) {
                 Logger.getLogger(AddRooms.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,32 +172,84 @@ public class AddRooms extends javax.swing.JFrame {
         }
         else if(str.equals("DOUBLE-AC"))
         {
+            
             try {
                 Connection con = Connectiond.getconn();
                 Statement stmt = con.createStatement();
-                p = "DA"+p;
-                String sql = "INSERT INTO roomda(RoomNo)"+"Values('"+p+"')";
-                stmt.executeUpdate(sql);
-                JOptionPane.showMessageDialog(rootPane,"Successfully Added");
+                String sql2 = "SELECT RoomNo FROM roomda";
+                ResultSet rs = stmt.executeQuery(sql2);
+                int m = 0;
+                pp = "DA"+p;
+                while(rs.next())
+                {
+                    String t = rs.getString("RoomNo");
+                    if(t.equalsIgnoreCase(pp))
+                    {
+                        System.out.println("Entered");
+                        m = 1;
+                        break;
+                    }
+               
+                }
+                if(m==1)
+                {
+                    JOptionPane.showMessageDialog(rootPane,"Room with that room no already exists...please give another number");
+                    t1.setText(" ");
+                }
+                else
+                {
+                    p = "DA"+p;
+                    String sql = "INSERT INTO roomda(RoomNo)"+"Values('"+p+"')";
+                    stmt.executeUpdate(sql);
+                    JOptionPane.showMessageDialog(rootPane,"Successfully Added");
+                }
                 
             } catch (SQLException ex) {
                 Logger.getLogger(AddRooms.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
+            
+     
             
         }
         else if(str.equals("DOUBLE-NONAC"))
         {
+            
             try {
                 Connection con = Connectiond.getconn();
                 Statement stmt = con.createStatement();
-                p = "DNA"+p;
-                String sql = "INSERT INTO roomdna(RoomNo)"+"Values('"+p+"')";
-                stmt.executeUpdate(sql);
-                JOptionPane.showMessageDialog(rootPane,"Successfully Added");
+                String sql2 = "SELECT RoomNo FROM roomdna";
+                ResultSet rs = stmt.executeQuery(sql2);
+                int m = 0;
+                pp = "DNA"+p;
+                while(rs.next())
+                {
+                    String t = rs.getString("RoomNo");
+                    if(t.equalsIgnoreCase(pp))
+                    {
+                        m = 1;
+                        break;
+                    }
+               
+                }
+                if(m==1)
+                {
+                    JOptionPane.showMessageDialog(rootPane,"Room with that room no already exists...please give another number");
+                    t1.setText(" ");
+                }
+                else
+                {
+                    p = "DNA"+p;
+                    String sql = "INSERT INTO roomdna(RoomNo)"+"Values('"+p+"')";
+                    stmt.executeUpdate(sql);
+                    JOptionPane.showMessageDialog(rootPane,"Successfully Added");
+                }
                 
             } catch (SQLException ex) {
+                ex.printStackTrace();
                 Logger.getLogger(AddRooms.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            
             
         }
     }//GEN-LAST:event_b1ActionPerformed

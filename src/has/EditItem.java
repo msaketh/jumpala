@@ -62,6 +62,7 @@ public class EditItem extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         l1 = new javax.swing.JLabel();
         l3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         b1 = new javax.swing.JButton();
         t2 = new javax.swing.JTextField();
         t3 = new javax.swing.JTextField();
@@ -89,6 +90,14 @@ public class EditItem extends javax.swing.JFrame {
 
         l3.setText("OLD DETAILS");
         getContentPane().add(l3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
+
+        jButton2.setText("BACK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, -1, -1));
 
         b1.setText("SAVE");
         b1.addActionListener(new java.awt.event.ActionListener() {
@@ -194,6 +203,10 @@ public class EditItem extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_b1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -233,6 +246,7 @@ public class EditItem extends javax.swing.JFrame {
     private javax.swing.JButton b1;
     private javax.swing.JComboBox c1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel l1;
