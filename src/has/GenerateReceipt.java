@@ -41,7 +41,7 @@ public class GenerateReceipt{
 
     static String name="Bill"+randomNum;
      //private static String FILE = "c:/temp/Bill3.pdf";
-    private static final String FILE = "F:/temp/"+name+".pdf";
+    private static final String FILE = "F:/"+name+".pdf";
   private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
       Font.BOLD);
   private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
@@ -50,8 +50,8 @@ public class GenerateReceipt{
       Font.BOLD);
   private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
       Font.BOLD);
-  static final String DB_URL1 = "jdbc:mysql://localhost/bookshop";
-    static final String USER1 = "kkk";
+  static final String DB_URL1 = "jdbc:mysql://10.117.13.215:3306/dbhas";
+    static final String USER1 = "kas";
     static final String PASS1 = "89878";
     public GenerateReceipt()
     {
