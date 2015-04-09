@@ -49,14 +49,17 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
         setBackground(new java.awt.Color(51, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton6.setText("logout");
+        jButton6.setBackground(new java.awt.Color(0, 255, 255));
+        jButton6.setForeground(new java.awt.Color(0, 102, 204));
+        jButton6.setText("LOGOUT");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 230, -1));
 
+        jButton3.setBackground(new java.awt.Color(0, 255, 255));
         jButton3.setForeground(new java.awt.Color(0, 102, 204));
         jButton3.setText("CHANGE USERNAME/PASSWORD");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +69,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 230, -1));
 
-        jButton1.setBackground(new java.awt.Color(102, 204, 255));
+        jButton1.setBackground(new java.awt.Color(0, 255, 255));
         jButton1.setForeground(new java.awt.Color(0, 102, 204));
         jButton1.setText("ADD ROOMS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +79,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 230, -1));
 
-        jButton2.setBackground(new java.awt.Color(102, 204, 255));
+        jButton2.setBackground(new java.awt.Color(0, 255, 255));
         jButton2.setForeground(new java.awt.Color(0, 102, 204));
         jButton2.setText("UPDATE TARIFF/RATES");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +89,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 230, -1));
 
-        jButton4.setBackground(new java.awt.Color(102, 204, 255));
+        jButton4.setBackground(new java.awt.Color(0, 255, 255));
         jButton4.setForeground(new java.awt.Color(0, 102, 204));
         jButton4.setText("UPDATE DISCOUNT");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +99,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 230, -1));
 
-        jButton5.setBackground(new java.awt.Color(102, 204, 255));
+        jButton5.setBackground(new java.awt.Color(0, 255, 255));
         jButton5.setForeground(new java.awt.Color(0, 102, 204));
         jButton5.setText("SET MIN FREQUENCY");
         jButton5.addActionListener(new java.awt.event.ActionListener() {

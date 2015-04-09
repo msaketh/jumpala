@@ -616,18 +616,19 @@ dispose();
                                             a=a/60;
                                             a=a/60;
                                             a=a/24;
-                                            if(a>60)
-            {
-                showMessageDialog(null, "Advanced Booking is not allowed for that period  ");
-                jButton6.setEnabled(false);
-                return;
-            }
-                                            if(a==0)
-            {
-                showMessageDialog(null, "Advanced Booking is not allowed for today  ");
-                jButton6.setEnabled(false);
-                return;
-            }
+                                             System.out.println("avalue is "+a);
+                                            if(a>60)                                             
+                 {
+                    showMessageDialog(null, "Advanced Booking is not allowed for that period  ");
+                   jButton6.setEnabled(false);
+                   return;
+                }
+                if(a==0)
+               {
+                  showMessageDialog(null, "Advanced Booking is not allowed for today  ");
+                  jButton6.setEnabled(false);
+                  return;
+               }
                                             s=(calendar.date.toString())+"-"+(((Integer)(calendar.month+1)).toString())+"-"+(calendar.year.toString()) ;
                                             jTextField4.setText(s);
                                             jButton6.setEnabled(true);
@@ -659,6 +660,12 @@ dispose();
 						
 						s=(calendar.date.toString())+"-"+(((Integer)(calendar.month+1)).toString())+"-"+(calendar.year.toString()) ;
 						cal1.set(calendar.year,calendar. month, calendar.date);
+                                                  if(a==0)
+            {
+                showMessageDialog(null, "Advanced Booking is not allowed for today  ");
+                jButton6.setEnabled(false);
+                return;
+            }
 						if((cal1.getTimeInMillis()-cal.getTimeInMillis())<0)
 						{
 							showMessageDialog(null, "Expected Check Out Date is before Check In Date  ");
@@ -731,6 +738,12 @@ dispose();
             
             a=(cal.getTimeInMillis())- (System.currentTimeMillis());
             a=a/1000; a=a/60;a=a/60; a=a/24;
+              if(a==0)
+            {
+                showMessageDialog(null, "Advanced Booking is not allowed for today  ");
+                jButton6.setEnabled(false);
+                return;
+            }
             b=(cal1.getTimeInMillis())- (System.currentTimeMillis());  
             b=b/1000;b=b/3600;b=b/24;
             
