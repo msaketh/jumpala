@@ -159,9 +159,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
                       advance = (Vector)o.readObject();
                   } 
                      advance.add(jTextField6.getText());
-                
-                  
-                 
+                               
                 String updatestr1 = "UPDATE customer SET Advance = ?  WHERE id = "+id1;
                  PreparedStatement pp = conn.prepareStatement(updatestr1);
                  pp.setObject(1,advance);
