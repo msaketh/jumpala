@@ -618,7 +618,7 @@ dispose();
                                                 return;
                                             }
                                             System.out.println(cz);
-                                            long a=(cz.getTimeInMillis())- (cas.getTimeInMillis());
+                                            long a=(cz.getTimeInMillis())- (c);
                                             System.out.println("avalue is "+a);
                                             a=a/1000;
                                             a=a/60;
