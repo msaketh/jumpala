@@ -257,9 +257,9 @@ public class Login extends javax.swing.JFrame {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        t2 = new javax.swing.JPasswordField();
         c1 = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        t2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         t1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -282,13 +282,13 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 153));
         jLabel5.setText("WELCOME TO HOTEL AUTOMATION SOFTWARE");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 140, 30));
 
         c1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MANAGER", "RECEPTIONIST", "CATERING SERVICES" }));
         getContentPane().add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 140, -1));
 
         jLabel4.setText("LOGIN AS:-");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 20));
-        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 140, 30));
 
         jLabel3.setText("PASSWORD:-");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
@@ -367,167 +367,11 @@ public class Login extends javax.swing.JFrame {
                 try {
                       if(str1.equals(m1)&& str2.equals(m2) )
                       {
-                         Connection con2 =  Connectiond.getconn();
-                         Statement stmt2 = con2.createStatement();
-                         String sql2 = "SELECT id,Value FROM central";
-                         ResultSet rs2 = stmt2.executeQuery(sql2);
-                         int id;
-                         while(rs2.next())
-                        {
-                            id  = rs2.getInt("id");
-                            if(id ==14)
-                            {
-                            
-                                 presentday = rs2.getInt("Value");
-                            
-                             }
-                        }
-    
-                        String sql3 = "SELECT id,ECID,ISAC FROM Customer";
-                        Connection con3 =  Connectiond.getconn();
-                        Statement stmt3 = con3.createStatement();
-                        ResultSet rs3 = stmt3.executeQuery(sql3);
-                        byte[] arr=null;
-                        Vector ecid = new Vector();
-                        int check1 = 0;
-                        int g = 0;
-                        while(rs3.next())
-                       {
-                             check1  = 0;
-                             arr = rs3.getBytes("ECID");
-                             g = rs3.getInt("id");
-                             if(arr!=null)
-                             {
-                                   ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(arr)); 
-                                   ecid = (Vector)o.readObject();
-                                   for(int j=0;j<ecid.size();++j)
-                                  {
-                                        if((long)presentday == (long)ecid.get(j))
-                                         {
-                                              check1  = 1;
-                                              break;
-                                         }
-                                  }
-                                  if(check1==1)
-                                  {
-                                     String  sql4="UPDATE customer"+" SET ISAC=1" +" WHERE id="+g;
-                                     Connection con4 = Connectiond.getconn();
-                                     Statement stmt4 = con4.createStatement();
-                                     stmt4.executeUpdate(sql4);
-                                     sql4="SELECT history FROM Customer"+" WHERE id="+g;
-                                     int history=0;
-                                     double fre=0;
-                                     try {
-                                           ResultSet rsz = stmt4.executeQuery(sql4);
-                                            history = rsz.getInt("history");         
-                                         } catch (SQLException ex) {
-                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-                                                 }
-                                     sql4 = "SELECT id,Value FROM central";
-                                     {
-                                        ResultSet rsz = stmt4.executeQuery(sql4);
-                                        double d = 0.0;
-                                        int iad;
-                                        while(rsz.next())
-                                         {
-                                              iad  = rsz.getInt("id");
-                                              if(iad == 9)
-                                              {
-                                                    fre = rsz.getDouble("Value");
-                                               }
-               
-                                          }
-                                      }
-                                     double custfre=history/(int)presentday;
-                                     if(custfre>=fre)
-                                     {
-                                          sql4="SELECT id,Identity FROM Customer"+" WHERE id="+g;
-                                          String sa=null;
-                                          try {
-                                          ResultSet rsz = stmt4.executeQuery(sql4);
-                                          sa= rsz.getString("Identity");         
-                                         } catch (SQLException ex) {
-                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-                                                 }
-                                          if(sa==null)
-                                          {
-                                            String s = null;
-                                            sql4 = "SELECT id,Value FROM central";
-                                           {
-                                         ResultSet rsz = stmt4.executeQuery(sql4);
-                                          int iad;
-                                           while(rsz.next())
-                                            {
-                                                iad  = rsz.getInt("id");
-                                                if(iad == 8)
-                                                {
-                                                    s= rsz.getString("value");
-                                                }
-               
-                                            }
-                                           }
-                                           try {
-                                                     String s1=s.substring(1);
-                                                     int i=Integer.parseInt(s1);
-                                                     i=i+1;
-                                                     s1="I"+i;
-                                                     sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
-                                                     stmt4.executeUpdate(sql4);
-                                                      sql4="UPDATE customer"+" SET Identity="+"'"+s1+"'"+" WHERE id="+g;
-                                                     stmt4.executeUpdate(sql4);
-                                                     sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=8";
-                                                      stmt4.executeUpdate(sql4);
-                                              } catch (SQLException ex) {
-                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-                                                 }
-                                          }
-                                          else
-                                          {
-                                               sql4 ="UPDATE customer"+" SET I="+"'"+sa+"'"+" WHERE id="+g;
-                                               stmt4.executeUpdate(sql4);
-                                          } 
-                            
-                                     }
-                                     else
-                                     {
-                                         String s=null;
-                                         sql4 = "SELECT id,Value FROM central";
-                                         {
-                                            ResultSet rsz = stmt4.executeQuery(sql4);
-                                            int iad;
-                                            while(rsz.next())
-                                            {
-                                                iad  = rsz.getInt("id");
-                                                if(iad == 7)
-                                                {
-                                                     s= rsz.getString("value");
-                                                }
-               
-                                            }
-                                         }
-                                         try {
-                                          
-                                                String s1=s.substring(1);
-                                                int i=Integer.parseInt(s1);
-                                                i=i+1;
-                                                s1="T"+i;
-                                                sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
-                                                stmt4.executeUpdate(sql4);
-                                                sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=7";
-                                                stmt4.executeUpdate(sql4);
-                                              } catch (SQLException ex) {
-                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-                                              }
-                                     }
-                             }
-                        }
-                    }
-                        CheckOut c = new CheckOut();
-                        c.setVisible(true);
-                        
-                        ManagerFunctions m = new ManagerFunctions();
+                        ManagerFunctions2 m = new ManagerFunctions2();
+                        t1.setText("");
+                        t2.setText("");
                         m.setVisible(true);
-                    }
+                     }
                    else{
                        JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
                     }
@@ -701,7 +545,8 @@ public class Login extends javax.swing.JFrame {
                     CheckOut c = new CheckOut();
                         c.setVisible(true);
                         
-                        
+                        t1.setText("");
+                        t2.setText("");
                         Receptionist r  = new Receptionist();
                         r.setVisible(true);
                     }
@@ -720,166 +565,10 @@ public class Login extends javax.swing.JFrame {
                 try {
                       if(str1.equals(m1)&& str2.equals(m2) )
                       {
-                         Connection con2 =  Connectiond.getconn();
-                         Statement stmt2 = con2.createStatement();
-                         String sql2 = "SELECT id,Value FROM central";
-                         ResultSet rs2 = stmt2.executeQuery(sql2);
-                         int id;
-                         while(rs2.next())
-                        {
-                            id  = rs2.getInt("id");
-                            if(id ==14)
-                            {
-                            
-                                 presentday = rs2.getInt("Value");
-                            
-                             }
-                        }
-    
-                        String sql3 = "SELECT id,ECID,ISAC FROM Customer";
-                        Connection con3 =  Connectiond.getconn();
-                        Statement stmt3 = con3.createStatement();
-                        ResultSet rs3 = stmt3.executeQuery(sql3);
-                        byte[] arr=null;
-                        Vector ecid = new Vector();
-                        int check1 = 0;
-                        int g = 0;
-                        while(rs3.next())
-                       {
-                             check1  = 0;
-                             arr = rs3.getBytes("ECID");
-                             g = rs3.getInt("id");
-                             if(arr!=null)
-                             {
-                                   ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(arr)); 
-                                   ecid = (Vector)o.readObject();
-                                   for(int j=0;j<ecid.size();++j)
-                                  {
-                                        if((long)presentday == (long)ecid.get(j))
-                                         {
-                                              check1  =1;
-                                              break;
-                                         }
-                                  }
-                                  if(check1==1)
-                                  {
-                                     String  sql4="UPDATE customer"+" SET ISAC=1" +" WHERE id="+g;
-                                     Connection con4 = Connectiond.getconn();
-                                     Statement stmt4 = con4.createStatement();
-                                     stmt4.executeUpdate(sql4);
-                                     sql4="SELECT history FROM Customer"+" WHERE id="+g;
-                                     int history=0,present=0;
-                                     double fre=0;
-                                     try {
-                                           ResultSet rsz = stmt4.executeQuery(sql4);
-                                            history = rsz.getInt("history");         
-                                         } catch (SQLException ex) {
-                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-                                                 }
-                                     sql4 = "SELECT id,Value FROM central";
-                                     {
-                                        ResultSet rsz = stmt4.executeQuery(sql4);
-                                        double d = 0.0;
-                                        int iad;
-                                        while(rsz.next())
-                                         {
-                                              iad  = rsz.getInt("id");
-                                              if(iad == 9)
-                                              {
-                                                    fre = rsz.getDouble("Value");
-                                               }
-               
-                                          }
-                                      }
-                                     double custfre=history/(int)presentday;
-                                     if(custfre>=fre)
-                                     {
-                                          sql4="SELECT id,Identity FROM Customer"+" WHERE id="+g;
-                                          String sa=null;
-                                          try {
-                                          ResultSet rsz = stmt4.executeQuery(sql4);
-                                          sa= rsz.getString("Identity");         
-                                         } catch (SQLException ex) {
-                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-                                                 }
-                                          if(sa==null)
-                                          {
-                                            String s = null;
-                                            sql4 = "SELECT id,Value FROM central";
-                                           {
-                                         ResultSet rsz = stmt4.executeQuery(sql4);
-                                          int iad;
-                                           while(rsz.next())
-                                            {
-                                                iad  = rsz.getInt("id");
-                                                if(iad == 8)
-                                                {
-                                                    s= rsz.getString("value");
-                                                }
-               
-                                            }
-                                           }
-                                           try {
-                                                     String s1=s.substring(1);
-                                                     int i=Integer.parseInt(s1);
-                                                     i=i+1;
-                                                     s1="I"+i;
-                                                     sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
-                                                     stmt4.executeUpdate(sql4);
-                                                      sql4="UPDATE customer"+" SET Identity="+"'"+s1+"'"+" WHERE id="+g;
-                                                     stmt4.executeUpdate(sql4);
-                                                     sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=8";
-                                                      stmt4.executeUpdate(sql4);
-                                              } catch (SQLException ex) {
-                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-                                                 }
-                                          }
-                                          else
-                                          {
-                                               sql4 ="UPDATE customer"+" SET I="+"'"+sa+"'"+" WHERE id="+g;
-                                               stmt4.executeUpdate(sql4);
-                                          } 
-                            
-                                     }
-                                     else
-                                     {
-                                         String s=null;
-                                         sql4 = "SELECT id,Value FROM central";
-                                         {
-                                            ResultSet rsz = stmt4.executeQuery(sql4);
-                                            int iad;
-                                            while(rsz.next())
-                                            {
-                                                iad  = rsz.getInt("id");
-                                                if(iad == 7)
-                                                {
-                                                     s= rsz.getString("value");
-                                                }
-               
-                                            }
-                                         }
-                                         try {
-                                          
-                                                String s1=s.substring(1);
-                                                int i=Integer.parseInt(s1);
-                                                i=i+1;
-                                                s1="T"+i;
-                                                sql4="UPDATE customer"+" SET I="+"'"+s1+"'"+" WHERE id="+g;
-                                                stmt4.executeUpdate(sql4);
-                                                sql4="UPDATE central"+" SET Value="+"'"+s1+"'"+" WHERE id=7";
-                                                stmt4.executeUpdate(sql4);
-                                              } catch (SQLException ex) {
-                                                               //Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
-                                              }
-                                     }
-                             }
-                        }
-                    }
-                        CheckOut cc = new CheckOut();
-                        cc.setVisible(true);
-                        
                         
                         CateringServices c = new CateringServices();
+                        t1.setText("");
+                        t2.setText("");
                         c.setVisible(true);
                     }
                    else{
@@ -938,6 +627,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField t1;
-    private javax.swing.JTextField t2;
+    private javax.swing.JPasswordField t2;
     // End of variables declaration//GEN-END:variables
 }

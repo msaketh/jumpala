@@ -106,6 +106,8 @@ public class EditItem extends javax.swing.JFrame {
             }
         });
         getContentPane().add(b1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 90, -1));
+
+        t2.setEditable(false);
         getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 100, -1));
         getContentPane().add(t3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 130, -1));
         getContentPane().add(t4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 130, -1));

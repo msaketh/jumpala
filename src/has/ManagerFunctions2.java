@@ -37,12 +37,12 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton6 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,17 +57,20 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 230, -1));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 130, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\manager.png")); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 350, 310));
 
         jButton3.setBackground(new java.awt.Color(0, 255, 255));
         jButton3.setForeground(new java.awt.Color(0, 102, 204));
-        jButton3.setText("CHANGE USERNAME/PASSWORD");
+        jButton3.setText("CHANGE U & P");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 230, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 130, -1));
 
         jButton1.setBackground(new java.awt.Color(0, 255, 255));
         jButton1.setForeground(new java.awt.Color(0, 102, 204));
@@ -77,7 +80,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 230, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 255, 255));
         jButton2.setForeground(new java.awt.Color(0, 102, 204));
@@ -87,7 +90,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 230, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 190, -1));
 
         jButton4.setBackground(new java.awt.Color(0, 255, 255));
         jButton4.setForeground(new java.awt.Color(0, 102, 204));
@@ -97,7 +100,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 230, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 180, -1));
 
         jButton5.setBackground(new java.awt.Color(0, 255, 255));
         jButton5.setForeground(new java.awt.Color(0, 102, 204));
@@ -107,13 +110,9 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 230, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 190, -1));
 
-        jLabel2.setBackground(new java.awt.Color(102, 204, 255));
-        jLabel2.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel2.setText("WELCOME TO HOTEL AUTOMATION SOFTWARE");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 290, 30));
-
+        jLabel1.setBackground(new java.awt.Color(51, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\Clasical-Gold-Background.jpg")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 310));
 
@@ -146,7 +145,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        Refresh.refresh();
+
         dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -193,6 +192,6 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
