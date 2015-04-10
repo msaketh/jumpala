@@ -597,25 +597,35 @@ dispose();
         calendar.date=1;
         calendar.month=0;
         calendar.year=2015;
-        
+        Calendar cas=Calendar.getInstance();
         
    			cd.btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
                                             String s;
                                             Calendar cz=Calendar.getInstance();
+                                            cal=Calendar.getInstance();
                                             cz.set(calendar.year,calendar.month, calendar.date);
-                                            if((cz.getTimeInMillis()-System.currentTimeMillis())<0)
+                                            cal.set(calendar.year,calendar.month, calendar.date);
+                                            System.out.println(calendar.year+""+calendar.month+""+ calendar.date);
+                                             System.out.println(cas.get(Calendar.MONTH));
+                                             System.out.println(cas.get(Calendar.DATE));
+                                             System.out.println(cas.get(Calendar.YEAR));
+                                             c=cas.getTimeInMillis();
+                                            
+                                            if((cz.getTimeInMillis()-c)<0)
                                             {
                                                 showMessageDialog(null, "This is a past date  ");
                                                 jButton6.setEnabled(false);
                                                 jTextField4.setText("");
                                                 return;
                                             }
-                                            long a=(cz.getTimeInMillis())- (System.currentTimeMillis());
+                                            System.out.println(cz);
+                                            long a=(cz.getTimeInMillis())- (cas.getTimeInMillis());
+                                            System.out.println("avalue is "+a);
                                             a=a/1000;
                                             a=a/60;
                                             a=a/60;
-                                            a=a/24;
+                                            a =(long) ((long)a/24);
                                              System.out.println("avalue is "+a);
                                             if(a>60)                                             
                  {
@@ -651,7 +661,7 @@ dispose();
         	jButton5.setEnabled(false);
                 jButton6.setEnabled(true);
 				
-				cal=(Calendar) datecalendar.c.clone();
+				//cal=(Calendar) datecalendar.c.clone();
 				calendar cd=new calendar();
 				cal1=Calendar.getInstance();
 				cd.btnSave.addActionListener(new ActionListener() {
@@ -660,12 +670,7 @@ dispose();
 						
 						s=(calendar.date.toString())+"-"+(((Integer)(calendar.month+1)).toString())+"-"+(calendar.year.toString()) ;
 						cal1.set(calendar.year,calendar. month, calendar.date);
-                                                  if(a==0)
-            {
-                showMessageDialog(null, "Advanced Booking is not allowed for today  ");
-                jButton6.setEnabled(false);
-                return;
-            }
+                                                 
 						if((cal1.getTimeInMillis()-cal.getTimeInMillis())<0)
 						{
 							showMessageDialog(null, "Expected Check Out Date is before Check In Date  ");
@@ -735,22 +740,25 @@ dispose();
                     
                 }
             }
+          
             
-            a=(cal.getTimeInMillis())- (System.currentTimeMillis());
+            a=(cal.getTimeInMillis())- (c);
+            
+                         System.out.println("a is is "+a);
+
             a=a/1000; a=a/60;a=a/60; a=a/24;
-              if(a==0)
-            {
-                showMessageDialog(null, "Advanced Booking is not allowed for today  ");
-                jButton6.setEnabled(false);
-                return;
-            }
-            b=(cal1.getTimeInMillis())- (System.currentTimeMillis());  
+             System.out.println("a is "+a);
+            b=(cal1.getTimeInMillis())- (c);  
+                         System.out.println("b is  is "+b);
+
             b=b/1000;b=b/3600;b=b/24;
+                         System.out.println("b is "+b);
+
             
             try {
-                /*System.out.println((int)a+presentday);
+                System.out.println((int)a+presentday);
                 System.out.println((int) b+presentday);
-                System.out.println(z);*/
+                System.out.println(z);
                 a=a+presentday;
                 b=b+presentday;
                 room= Checkavailable.check((int)a,(int) b,z );
@@ -861,9 +869,9 @@ dispose();
             }
         });
     }
-    Calendar cal,cal1,present;
+    Calendar cal,cal1,present,cas;
     int z;   
-    long a,b;
+    long a,b,c;
     String room;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
