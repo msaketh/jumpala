@@ -157,6 +157,7 @@ public class Checkin extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 String s;
                 Calendar cz=Calendar.getInstance();
+                Calendar cas=Calendar.getInstance();
                 cz.set(calendar.year,calendar.month, calendar.date);
                 if((cz.getTimeInMillis()-System.currentTimeMillis())<0)
                 {
@@ -165,11 +166,18 @@ public class Checkin extends javax.swing.JFrame {
                     jTextField4.setText("");
                     return;
                 }
-                long a=(cz.getTimeInMillis())- (System.currentTimeMillis());
+                c=cas.getTimeInMillis();
+                long a=(cz.getTimeInMillis())- (c);
                 a=a/1000;
                 a=a/60;
                 a=a/60;
                 a=a/24;
+                if(a==0)
+                {
+                     showMessageDialog(null, "You cannot check out today only  ");
+                    jButton7.setVisible(false);
+                    return;
+                }
                 if(a>60)
                 {
                     showMessageDialog(null, "You cannot check In for that long  ");
@@ -220,7 +228,7 @@ public class Checkin extends javax.swing.JFrame {
                 }
             }
             cal=(Calendar) datecalendar.c.clone();
-            b=(cal.getTimeInMillis())- (System.currentTimeMillis());  
+            b=(cal.getTimeInMillis())- (c);  
             b=b/1000;b=b/3600;b=b/24;
             
             try {
@@ -293,9 +301,9 @@ public class Checkin extends javax.swing.JFrame {
             }
         });
     }
-Calendar cal,cal1,present;
+Calendar cal,cas,cal1,present;
     int z;   
-    long a,b;
+    long a,b,c;
     String room;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton4;

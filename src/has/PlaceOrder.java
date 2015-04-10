@@ -171,7 +171,7 @@ public class PlaceOrder extends javax.swing.JFrame {
                     {
                         ObjectInputStream o = new ObjectInputStream(new ByteArrayInputStream(arr));
                         catering  = (Vector)o.readObject();
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                         Date date = new Date();
                         String s = dateFormat.format(date);
                         CateringObject cc = new CateringObject();
