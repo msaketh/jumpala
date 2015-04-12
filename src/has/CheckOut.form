@@ -103,14 +103,14 @@
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="8" rowCount="0">
-                    <Column editable="true" title="Customer Name" type="java.lang.Object"/>
-                    <Column editable="true" title="Unique Number" type="java.lang.Object"/>
-                    <Column editable="true" title="Total Catering Bill" type="java.lang.Object"/>
-                    <Column editable="true" title="Advance" type="java.lang.Object"/>
-                    <Column editable="true" title="Room Rent" type="java.lang.Object"/>
-                    <Column editable="true" title="Tariff Amt" type="java.lang.Object"/>
-                    <Column editable="true" title="Discount Amt" type="java.lang.Object"/>
-                    <Column editable="true" title="Final Bill" type="java.lang.Object"/>
+                    <Column editable="false" title="Customer Name" type="java.lang.Object"/>
+                    <Column editable="false" title="Unique Number" type="java.lang.Object"/>
+                    <Column editable="false" title="Total Catering Bill" type="java.lang.Object"/>
+                    <Column editable="false" title="Advance" type="java.lang.Object"/>
+                    <Column editable="false" title="Room Rent" type="java.lang.Object"/>
+                    <Column editable="false" title="Tariff Amt" type="java.lang.Object"/>
+                    <Column editable="false" title="Discount Amt" type="java.lang.Object"/>
+                    <Column editable="false" title="Final Bill" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>

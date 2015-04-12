@@ -151,13 +151,16 @@ public class CheckOut extends javax.swing.JFrame {
                   } 
                   if(Catering.size()!=0)
                   {
-                                   System.out.println("Enterte in catering");     
+                                   System.out.println("Enterted in catering");     
                                 CateringObject obj=(CateringObject) Catering.elementAt(0);
                                         Totalbill=obj.bill;
+                                        System.out.println(tb);
                                          tb.addRow(new Object[]{new String(rs.getString("Name")),new String(rs.getString("I")),new String(obj.date),new String(obj.item),new Double(obj.bill) });
                                                          for(int f=1;f<Catering.size();f++)
                                                           {
                                                               obj=(CateringObject) Catering.elementAt(f);
+                                                                                                                            System.out.println("In x==2 case catering loop");
+
                                                             tb.addRow(new Object[]{new String(""),new String(""),new String(obj.date),new String(obj.item),new Double(obj.bill) });
                                                             Totalbill=Totalbill+obj.bill;
                                                            }
@@ -175,7 +178,7 @@ public class CheckOut extends javax.swing.JFrame {
                   stmt1.executeUpdate(sql);
                   sql="UPDATE customer SET ISAC= 0 WHERE id= "+rs.getInt("id");
                   System.out.println(sql);
-                 stmt5.executeUpdate(sql);
+                stmt5.executeUpdate(sql);
                   int to=0;
                   String room=rs.getString("Room");
                   String roompart=room.substring(0,2);
@@ -194,13 +197,17 @@ public class CheckOut extends javax.swing.JFrame {
                        totalbookings.setElementAt(to,0);
                   }
                   
-                  if(roompart.equalsIgnoreCase("SNA"))
+                  if(roompart.equalsIgnoreCase("SN"))
                   {
+                      System.out.println(rates);
                        amount=ap1*(int) rates.elementAt(1);
+                       System.out.println("reate"+(int) rates.elementAt(1));
                        roomrent=amount;
                        amount=amount+Totalbill;
                         tariffa=(amount*(double)tariff.elementAt(1))/100;
+                        System.out.println("tariff "+(double)tariff.elementAt(1));
                        amount=amount+(amount*(double)tariff.elementAt(1))/100;
+                       System.out.println("amount "+amount);
                        to=(int) totalbookings.elementAt(1);
                        to=to+ap1;
                        totalbookings.setElementAt(to,1);
@@ -216,7 +223,7 @@ public class CheckOut extends javax.swing.JFrame {
                        to=to+ap1;
                        totalbookings.setElementAt(to,2);
                   }
-                  if(roompart.equalsIgnoreCase("DNA"))
+                  if(roompart.equalsIgnoreCase("DN"))
                   {
                       amount=ap1*(int) rates.elementAt(3);
                       roomrent=amount;
@@ -320,9 +327,11 @@ public class CheckOut extends javax.swing.JFrame {
                                          tb.addRow(new Object[]{new String(rs.getString("Name")),new String(rs.getString("I")),new String(obj.date),new String(obj.item),new Double(obj.bill) });
                                                          for(int f=1;f<Catering.size();f++)
                                                           {
+                                                              System.out.println("In x==1 case catering loop");
                                                               obj=(CateringObject) Catering.elementAt(f);
                                                             tb.addRow(new Object[]{new String(""),new String(""),new String(obj.date),new String(obj.item),new Double(obj.bill) });
                                                             Totalbill=Totalbill+obj.bill;
+                                                              System.out.println(tb);
                                                            }
                                                          String updatestr = "UPDATE customer SET Catering = ?  WHERE id = "+rs.getInt("id");
                                                          PreparedStatement p = conn.prepareStatement(updatestr);
@@ -339,8 +348,8 @@ public class CheckOut extends javax.swing.JFrame {
                     System.out.println("ecod = "+ppp);
                     System.out.println("ecid = "+qqq);
                   long ap1=ppp - qqq+1;
-                  // sql="UPDATE customer SET ISAC=0 WHERE id= "+rs.getInt("id");
-                 // stmt3.executeUpdate(sql);
+                  sql="UPDATE customer SET ISAC=0 WHERE id= "+rs.getInt("id");
+                  stmt3.executeUpdate(sql);
                   
                   int ap=rs.getInt("History")+(int)ap1;
                    sql="UPDATE customer SET history="+ap+" WHERE id= "+rs.getInt("id");
@@ -362,7 +371,7 @@ public class CheckOut extends javax.swing.JFrame {
                        totalbookings.setElementAt(to,0);
                   }
                   
-                  if(roompart.equalsIgnoreCase("SNA"))amount=(double) rates.elementAt(1);
+                  if(roompart.equalsIgnoreCase("SN"))
                   {
                        amount=ap1*(int) rates.elementAt(1);
                        roomrent=amount;
@@ -384,7 +393,7 @@ public class CheckOut extends javax.swing.JFrame {
                        to=to+(int)ap1;
                        totalbookings.setElementAt(to,2);
                   }
-                  if(roompart.equalsIgnoreCase("DNA"))
+                  if(roompart.equalsIgnoreCase("DN"))
                   {
                       amount=ap1*(int) rates.elementAt(3);
                       roomrent=amount;
@@ -511,7 +520,15 @@ public class CheckOut extends javax.swing.JFrame {
             new String [] {
                 "Customer Name", "Unique Number", "Total Catering Bill", "Advance", "Room Rent", "Tariff Amt", "Discount Amt", "Final Bill"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jPanel1.add(jScrollPane2);

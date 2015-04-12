@@ -10,7 +10,7 @@ package has;
  * @author SivaKesava1
  */
 public class Url {
-       static String url = "jdbc:mysql://10.117.13.215:3306/dbhas";
+       static String url = "jdbc:mysql://localhost:3306/dbhas";
         static String password = "89878";
-        static String user = "kas";
+        static String user = "root";
 }

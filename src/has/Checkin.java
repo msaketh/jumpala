@@ -152,26 +152,31 @@ public class Checkin extends javax.swing.JFrame {
         calendar.date=1;
         calendar.month=0;
         calendar.year=2015;
+         Calendar cas=Calendar.getInstance();
 
         cd.btnSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String s;
                 Calendar cz=Calendar.getInstance();
-                Calendar cas=Calendar.getInstance();
+               
                 cz.set(calendar.year,calendar.month, calendar.date);
-                if((cz.getTimeInMillis()-System.currentTimeMillis())<0)
+                 c=cas.getTimeInMillis();
+                if((cz.getTimeInMillis()-c)<0)
                 {
                     showMessageDialog(null, "This is a past date  ");
                     jButton7.setVisible(false);
                     jTextField4.setText("");
                     return;
                 }
-                c=cas.getTimeInMillis();
-                long a=(cz.getTimeInMillis())- (c);
-                a=a/1000;
-                a=a/60;
-                a=a/60;
-                a=a/24;
+               
+                 System.out.println(cz);
+                                            a=(cz.getTimeInMillis())- (c);
+                                            System.out.println("avalue is "+a);
+                                            a=a/1000;
+                                            a=a/60;
+                                            a=a/60;
+                                            a =(long) ((long)a/24);
+                                             System.out.println("avalue is "+a);
                 if(a==0)
                 {
                      showMessageDialog(null, "You cannot check out today only  ");
@@ -228,20 +233,21 @@ public class Checkin extends javax.swing.JFrame {
                 }
             }
             cal=(Calendar) datecalendar.c.clone();
-            b=(cal.getTimeInMillis())- (c);  
-            b=b/1000;b=b/3600;b=b/24;
+          //  b=(cal.getTimeInMillis())- (c);  
+          //  b=b/1000;b=b/3600;b=b/24;
             
             try {
                 /*
                 System.out.println((int) b+presentday);
                 System.out.println(z);
                 System.out.println(presentday);*/
-                a=presentday;
-                b=b+presentday;
+              //  a=presentday;
+                a=a+presentday;
+                System.out.println(presentday);
                 System.out.println(a);
                 System.out.println(b);
                 System.out.println(z);
-                room= Checkavailable.check(presentday,(int) b,z );
+                room= Checkavailable.check(presentday,(int) a,z );
                 // System.out.println(room);
             } catch (SQLException ex) {
                 //    Logger.getLogger(advancebooking.class.getName()).log(Level.SEVERE, null, ex);
@@ -251,7 +257,7 @@ public class Checkin extends javax.swing.JFrame {
                 
                 // new Checkinlink(a,b,room,z).setVisible(true);
                 //  ck.setVisible(true);
-                new NewJFrame(a,b,room,z).setVisible(true);
+                new NewJFrame(presentday,(int) a,room,z).setVisible(true);
                 dispose();
             }
             else

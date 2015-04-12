@@ -542,6 +542,8 @@ public class Login extends javax.swing.JFrame {
                              }
                         }
                     }
+                        //GenerateReceipt ppp = new GenerateReceipt();
+                        
                     CheckOut c = new CheckOut();
                         c.setVisible(true);
                         
