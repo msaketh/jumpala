@@ -245,6 +245,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setLayout(null);
 
