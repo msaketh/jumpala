@@ -101,7 +101,7 @@ public static void updateroom(String roomno,int s,int t,int d) throws SQLExcepti
                         sql=sql+"="+"'B'";
                         sql=sql+" WHERE roomno = ";
                         sql=sql+"'"+roomno+"'";
-                        System.out.println(sql);
+                      //  System.out.println(sql);
                         stmt.executeUpdate(sql);
                     }
           
@@ -131,7 +131,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
                id  = rs.getInt("id");
                if(id == id1)
                {
-                   System.out.println("Inside id"+id);
+                //   System.out.println("Inside id"+id);
                     ObjectInputStream o = null;
                   byte[] arr = rs.getBytes("Advance_room");
                    Vector Advance_room = new Vector();
@@ -149,7 +149,7 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
                  p.setObject(1,Advance_room);
                  p.executeUpdate();
                  
-                  System.out.println("Inside id after room");
+               //   System.out.println("Inside id after room");
                   
                  byte[] arr2 = rs.getBytes("Advance");
                  Vector advance =new Vector();
@@ -518,8 +518,8 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
               {
                id  = rs.getInt("id");
                int is=rs.getInt("ISAC");
-                  System.out.println("ISAC"+is);
-                  System.out.println("Id"+id+"  g"+g);
+              //    System.out.println("ISAC"+is);
+              //    System.out.println("Id"+id+"  g"+g);
                
                if(id == g)
                {
@@ -563,8 +563,8 @@ public void updatecustomer(int id1)throws SQLException, IOException, ClassNotFou
                        }
          
       try {
-          System.out.println(room);
-          System.out.println(g);
+        //  System.out.println(room);
+       //   System.out.println(g);
          updateroom(room,(int)a,(int)b,z);
           updatecustomer(g);
           showMessageDialog(null, "Succesfully Booked the room  ");
@@ -605,10 +605,10 @@ dispose();
                                             cal=Calendar.getInstance();
                                             cz.set(calendar.year,calendar.month, calendar.date);
                                             cal.set(calendar.year,calendar.month, calendar.date);
-                                            System.out.println(calendar.year+""+calendar.month+""+ calendar.date);
+                                         /*   System.out.println(calendar.year+""+calendar.month+""+ calendar.date);
                                              System.out.println(cas.get(Calendar.MONTH));
                                              System.out.println(cas.get(Calendar.DATE));
-                                             System.out.println(cas.get(Calendar.YEAR));
+                                             System.out.println(cas.get(Calendar.YEAR));*/
                                              c=cas.getTimeInMillis();
                                             
                                             if((cz.getTimeInMillis()-c)<0)
@@ -618,14 +618,14 @@ dispose();
                                                 jTextField4.setText("");
                                                 return;
                                             }
-                                            System.out.println(cz);
+                                          //  System.out.println(cz);
                                             long a=(cz.getTimeInMillis())- (c);
-                                            System.out.println("avalue is "+a);
+                                         //   System.out.println("avalue is "+a);
                                             a=a/1000;
                                             a=a/60;
                                             a=a/60;
                                             a =(long) ((long)a/24);
-                                             System.out.println("avalue is "+a);
+                                            // System.out.println("avalue is "+a);
                                             if(a>60)                                             
                  {
                     showMessageDialog(null, "Advanced Booking is not allowed for that period  ");
@@ -743,21 +743,21 @@ dispose();
             
             a=(cal.getTimeInMillis())- (c);
             
-                         System.out.println("a is is "+a);
+                         //System.out.println("a is is "+a);
 
             a=a/1000; a=a/60;a=a/60; a=a/24;
              System.out.println("a is "+a);
             b=(cal1.getTimeInMillis())- (c);  
-                         System.out.println("b is  is "+b);
+                      //   System.out.println("b is  is "+b);
 
             b=b/1000;b=b/3600;b=b/24;
-                         System.out.println("b is "+b);
+                     //    System.out.println("b is "+b);
 
             
             try {
-                System.out.println((int)a+presentday);
+              /*  System.out.println((int)a+presentday);
                 System.out.println((int) b+presentday);
-                System.out.println(z);
+                System.out.println(z);*/
                 a=a+presentday;
                 b=b+presentday;
                 room= Checkavailable.check((int)a,(int) b,z );
@@ -837,13 +837,13 @@ dispose();
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+  /*  public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+      /*  try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -862,12 +862,12 @@ dispose();
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+      /*  java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new advancebooking().setVisible(true);
             }
         });
-    }
+    }*/
     Calendar cal,cal1,present,cas;
     int z;   
     long a,b,c;

@@ -184,14 +184,20 @@ public class CheckOut extends javax.swing.JFrame {
                   String roompart=room.substring(0,2);
                   double roomrent=0,tariffa=0,discounta=0,advance=0;
                   advance=rs.getDouble("RTP");
-                    System.out.println(roompart);
+                   System.out.println(roompart);
+                    
                   if(roompart.equalsIgnoreCase("SA")){
                       amount=ap1*(int) rates.elementAt(0);
                       roomrent=amount;
                       System.out.println("roomrent="+roomrent);
+                      System.out.println("amount after rent"+amount);
                        amount=amount+Totalbill;
+                       System.out.println("amount after totalbill"+amount);
                        tariffa=(amount*(double)tariff.elementAt(0))/100;
+                       System.out.println("tariffa "+tariffa);
                        amount=amount+tariffa;
+                                              System.out.println("amount after tariffa"+amount);
+
                        to=(int) totalbookings.elementAt(0);
                        to=to+ap1;
                        totalbookings.setElementAt(to,0);
@@ -268,6 +274,7 @@ public class CheckOut extends javax.swing.JFrame {
                      amount=amount-discounta;
                  }  
                     amount=amount-advance;
+                    System.out.println("amount after advance "+amount);
                   tb2.addRow(new Object[]{new String(rs.getString("Name")),new String(rs.getString("I")),new Double(Totalbill),new Double(advance),new Double(roomrent),new Double(tariffa),new Double(discounta),new Double(amount)});
                 }
               }
@@ -339,14 +346,14 @@ public class CheckOut extends javax.swing.JFrame {
                                                          p.executeUpdate();
                   }
                  
-                    System.out.println("l == "+l);
-                    System.out.println("size = "+ecod.size());
-                    System.out.println(ecod);
-                    System.out.println(ecid);
+                    //System.out.println("l == "+l);
+                   // System.out.println("size = "+ecod.size());
+                   // System.out.println(ecod);
+                 //   System.out.println(ecid);
                     long ppp = (long)ecod.get(l);
                     long qqq = (long)ecid.get(l);
-                    System.out.println("ecod = "+ppp);
-                    System.out.println("ecid = "+qqq);
+                  //  System.out.println("ecod = "+ppp);
+                  //  System.out.println("ecid = "+qqq);
                   long ap1=ppp - qqq+1;
                   sql="UPDATE customer SET ISAC=0 WHERE id= "+rs.getInt("id");
                   stmt3.executeUpdate(sql);
@@ -357,18 +364,27 @@ public class CheckOut extends javax.swing.JFrame {
                   
                   int to=0;
                   String room=(String) advanceroom.elementAt(l);
-                  String roompart=room.substring(0,1);
+                  String roompart=room.substring(0,2);
+                    System.out.println("roompart"+roompart);
                   double roomrent=0,tariffa=0,discounta=0,advance=0;
                   advance=Double.parseDouble((String) advancev.elementAt(l));
+                  
                   if(roompart.equalsIgnoreCase("SA")){
-                      amount=ap1*(int) rates.elementAt(0);
-                      roomrent=amount;
+                    
+                      System.out.println(rates);
+                      System.out.println("ap1"+ap1);
+                       amount=ap1*(int) rates.elementAt(0);
+                       System.out.println("reate"+(int) rates.elementAt(0));
+                       roomrent=amount;
                        amount=amount+Totalbill;
-                       tariffa=(amount*(double)tariff.elementAt(0))/100;
-                       amount=amount+tariffa;
+                        tariffa=(amount*(double)tariff.elementAt(0))/100;
+                        System.out.println("tariff "+(double)tariff.elementAt(0));
+                       amount=amount+(amount*(double)tariff.elementAt(0))/100;
+                       System.out.println("amount "+amount);
                        to=(int) totalbookings.elementAt(0);
                        to=to+(int)ap1;
                        totalbookings.setElementAt(to,0);
+                       
                   }
                   
                   if(roompart.equalsIgnoreCase("SN"))
@@ -555,13 +571,13 @@ public class CheckOut extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+   /* public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+      /* try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -580,7 +596,7 @@ public class CheckOut extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       /* java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     new CheckOut().setVisible(true);
@@ -593,7 +609,7 @@ public class CheckOut extends javax.swing.JFrame {
                 }
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
