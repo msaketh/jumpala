@@ -60,7 +60,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
         });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 130, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\manager.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/manager.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 350, 310));
 
         jButton3.setBackground(new java.awt.Color(0, 255, 255));
@@ -114,7 +114,7 @@ public class ManagerFunctions2 extends javax.swing.JFrame {
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 190, -1));
 
         jLabel1.setBackground(new java.awt.Color(51, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\Clasical-Gold-Background.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/Clasical-Gold-Background.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 310));
 
         pack();

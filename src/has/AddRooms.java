@@ -80,7 +80,7 @@ public class AddRooms extends javax.swing.JFrame {
         });
         getContentPane().add(b1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 80, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\Room.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/Room.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 390));
 
         pack();

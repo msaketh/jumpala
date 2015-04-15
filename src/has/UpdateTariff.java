@@ -127,7 +127,7 @@ public class UpdateTariff extends javax.swing.JFrame {
         t2.setForeground(new java.awt.Color(0, 102, 204));
         getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 130, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\tariffs.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/tariffs.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 600, 420));
 
         b1.setForeground(new java.awt.Color(0, 102, 204));
@@ -147,7 +147,7 @@ public class UpdateTariff extends javax.swing.JFrame {
         jLabel2.setText("SELECT TYPE OF ROOM:-");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 140, 20));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\background2.jpeg")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/background2.jpeg"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 600, 480));
 
         pack();

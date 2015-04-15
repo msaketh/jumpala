@@ -321,7 +321,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\MAHANKALI SAKETH\Desktop\discount2.png"/>
+          <Image iconType="3" name="/has/discount2.png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -333,7 +333,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\MAHANKALI SAKETH\Desktop\background3.jpg"/>
+          <Image iconType="3" name="/has/background3.jpg"/>
         </Property>
       </Properties>
       <Constraints>

@@ -257,7 +257,7 @@ public class Login extends javax.swing.JFrame {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        t2 = new javax.swing.JPasswordField();
+        text = new javax.swing.JTextField();
         c1 = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -283,7 +283,7 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 153));
         jLabel5.setText("WELCOME TO HOTEL AUTOMATION SOFTWARE");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 140, 30));
+        getContentPane().add(text, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 140, 30));
 
         c1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MANAGER", "RECEPTIONIST", "CATERING SERVICES" }));
         getContentPane().add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 140, -1));
@@ -298,7 +298,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("USERNAME:-");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\MAHANKALI SAKETH\\Desktop\\Hotel1.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/has/Hotel1.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 420));
 
         pack();
@@ -307,7 +307,8 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String str = (String)c1.getSelectedItem();
         String str1 = t1.getText();
-        String str2 = t2.getText();
+        
+        String str2 = text.getText();
         String m1 = "";
            String m2 = "";
            String r1 = "";
@@ -370,7 +371,7 @@ public class Login extends javax.swing.JFrame {
                       {
                         ManagerFunctions2 m = new ManagerFunctions2();
                         t1.setText("");
-                        t2.setText("");
+                        text.setText("");
                         m.setVisible(true);
                      }
                    else{
@@ -549,7 +550,7 @@ public class Login extends javax.swing.JFrame {
                         c.setVisible(true);
                         
                         t1.setText("");
-                        t2.setText("");
+                        text.setText("");
                         Receptionist r  = new Receptionist();
                         r.setVisible(true);
                     }
@@ -566,16 +567,21 @@ public class Login extends javax.swing.JFrame {
             if(str.equals("CATERING SERVICES"))
             {
                 try {
-                      if(str1.equals(m1)&& str2.equals(m2) )
+                      if(str1.equals(c1)&& str2.equals(c2) )
                       {
                         
                         CateringServices c = new CateringServices();
                         t1.setText("");
-                        t2.setText("");
+                        text.setText("");
                         c.setVisible(true);
                     }
                    else{
-                       JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
+                       
+                          System.out.println("m1 == "+m1);
+                          System.out.println("m2 == "+m2);
+                          System.out.println(t1.getText());
+                          System.out.println(text.getText());
+                          JOptionPane.showMessageDialog(rootPane,"PLease enter username/password correctly");
                     }
                     
                 }
@@ -630,6 +636,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField t1;
-    private javax.swing.JPasswordField t2;
+    private javax.swing.JTextField text;
     // End of variables declaration//GEN-END:variables
 }
