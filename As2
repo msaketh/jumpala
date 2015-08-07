@@ -1,0 +1,41 @@
+Computer Science & Engineering Department
+I. I. T. Kharagpur
+Compilers Laboratory: CS39003
+3rd Year CSE: 5th Semester
+Assignment - 2: Creating Library Marks: 10
+Assign Date: 28th July, 2014 Submit Date: 23:55, 11th August, 2014
+1. Write a C program consisting of the following functions to create a li-
+brary. You cannot use any standard library function. You have to use
+in-line assembly language program of x86 along with int $128 (software
+interrupt) for GCC assembler.
+ int prints(char *) - prints a string of characters. The parameter
+is terminated by `\0'. The return value is the number of characters
+printed.
+ int printi(int n) - prints the integer value of n (no newline). It
+returns the number of characters printed.
+ int readi(int *eP) - reads an integer (signed) and returns it. The
+parameter is for error (ERR = 1, OK = 0).
+ int readf(float *fP) - reads a 
+oating point number in '%f' for-
+mat e.g. -123.456. Caller get the value through the pointer param-
+eter. The return value is ERR or OK.
+ int printd(float f) - prints the 
+oating point number passed as
+parameter. Returns the number of characters printed.
+The header le myl.h is as follows:
+#ifndef _MYL_H
+#define _MYL_H
+#define ERR 1
+#define OK 0
+int prints(char *);
+int printi(int);
+int readi(int *eP); // *eP is for error, if the input is not an integer
+int readf(float *); // return value is error or OK
+int printf(float);
+int prints(char *);
+#endif
+2. Name of your .c le should be ass2 roll.c. Only header le you include
+is #include "myl.h". It should not contain the function main(). Write
+your main() (in a separate le) to test your library. Do not change the
+supplied header le.
+1
