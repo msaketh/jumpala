@@ -3,7 +3,7 @@ I. I. T. Kharagpur
 Compilers Laboratory: CS39003
 3rd Year CSE: 5th Semester
 Assignment - 2: Creating Library Marks: 10
-Assign Date: 28th July, 2014 Submit Date: 23:55, 11th August, 2014
+Assign Date: 29th July, 2015 Submit Date: 23:55, 11th August, 2015
 1. Write a C program consisting of the following functions to create a li-
 brary. You cannot use any standard library function. You have to use
 in-line assembly language program of x86 along with int $128 (software
